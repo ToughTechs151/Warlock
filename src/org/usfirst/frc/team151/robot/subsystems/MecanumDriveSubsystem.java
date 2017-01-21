@@ -53,8 +53,8 @@ public class MecanumDriveSubsystem extends Subsystem {
 	public void drive(Joystick joystick) {
 		//robotDrive.mecanumDrive_Cartesian(joystick.getRawAxis(0), joystick.getRawAxis(1), joystick.getRawAxis(2), 0);
 		robotDrive.mecanumDrive_Cartesian(threshold(joystick.getRawAxis(0)), threshold(joystick.getRawAxis(1)), 0, 0);
-		System.out.println("Joy 0 " + joystick.getRawAxis(0)+ " " + threshold(joystick.getRawAxis(0)));
-		System.out.println("Joy 1 " + joystick.getRawAxis(1)+ " " + threshold(joystick.getRawAxis(0)));
+		//System.out.println("Joy 0 " + joystick.getRawAxis(0)+ " " + threshold(joystick.getRawAxis(0)));
+		//System.out.println("Joy 1 " + joystick.getRawAxis(1)+ " " + threshold(joystick.getRawAxis(0)));
 		//System.out.println(joystick.getRawAxis(2));
 	}
 	
