@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -26,6 +27,8 @@ public class MecanumDriveSubsystem extends Subsystem {
 		leftReartSpeedController = new Talon(RobotMap.leftRearMotor);
 		
 		robotDrive = new RobotDrive(leftFrontSpeedController, leftReartSpeedController, rightFrontSpeedController, rightRearSpeedController);
+		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
+		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
 	}
 	
 	public void initDefaultCommand() {
@@ -48,6 +51,19 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 * @param joystick
 	 */
 	public void drive(Joystick joystick) {
-		robotDrive.mecanumDrive_Cartesian(joystick.getX(), joystick.getY(), joystick.getZ(), 0);
+		//robotDrive.mecanumDrive_Cartesian(joystick.getRawAxis(0), joystick.getRawAxis(1), joystick.getRawAxis(2), 0);
+		robotDrive.mecanumDrive_Cartesian(threshold(joystick.getRawAxis(0)), threshold(joystick.getRawAxis(1)), 0, 0);
+		System.out.println("Joy 0 " + joystick.getRawAxis(0)+ " " + threshold(joystick.getRawAxis(0)));
+		System.out.println("Joy 1 " + joystick.getRawAxis(1)+ " " + threshold(joystick.getRawAxis(0)));
+		//System.out.println(joystick.getRawAxis(2));
+	}
+	
+	public double threshold (double rawAxis) {
+		if (Math.abs(rawAxis) < 0.04) {
+			return 0;
+		}
+		else {
+			return 0.5*rawAxis;
+		}
 	}
 }

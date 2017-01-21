@@ -32,6 +32,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		System.out.println("Entering roboInit");
 		oi = new OI();
 		chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());
