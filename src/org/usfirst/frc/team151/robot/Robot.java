@@ -100,7 +100,7 @@ public class Robot extends IterativeRobot {
 	}
 
 	/**
-	 * This function is called periodically during operator controlt6q
+	 * This function is called periodically during operator control
 	 */
 	@Override
 	public void teleopPeriodic() {

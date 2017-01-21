@@ -21,7 +21,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 	private RobotDrive robotDrive = null;
 
 	public MecanumDriveSubsystem() {
-		leftFrontSpeedController = new Talon(RobotMap.leftFrontMotor);
+		leftFrontSpeedController = new Talon(RobotMap.leftFrontMotor); 
 		rightFrontSpeedController = new Talon(RobotMap.rightFrontMotor);
 		rightRearSpeedController = new Talon(RobotMap.rightRearMotor);
 		leftReartSpeedController = new Talon(RobotMap.leftRearMotor);
