@@ -1,5 +1,8 @@
 package org.usfirst.frc.team151.robot;
 
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.SPI.Port;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -15,11 +18,12 @@ public class RobotMap {
 	public static int shooterMotor = 5;
 	public static int relayRopeClimber = 6;
 	
-	//Pneumatics
+	//Pneumatics-Analog Channel
 	public static int lowGoalSolenoid = 0;
 	public static int GearPort = 0; // DIO Port Number for Gear Control
 	public static int GearSol = 1; // Solenoid Number on PCM Module
 
+	//public static SPI.Port SPI_port_Gyro = new SPI.Port(0);
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;

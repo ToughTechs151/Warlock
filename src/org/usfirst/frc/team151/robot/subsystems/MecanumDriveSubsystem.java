@@ -3,8 +3,10 @@ package org.usfirst.frc.team151.robot.subsystems;
 import org.usfirst.frc.team151.robot.RobotMap;
 import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
@@ -19,14 +21,21 @@ public class MecanumDriveSubsystem extends Subsystem {
 	private SpeedController rightRearSpeedController = null;
 	private SpeedController leftReartSpeedController = null;
 	private RobotDrive robotDrive = null;
+	
+	public static ADXRS450_Gyro gyro = null;
 
 	public MecanumDriveSubsystem() {
-		leftFrontSpeedController = new Talon(RobotMap.leftFrontMotor); 
+		leftFrontSpeedController = new Talon(RobotMap.leftFrontMotor);        
 		rightFrontSpeedController = new Talon(RobotMap.rightFrontMotor);
 		rightRearSpeedController = new Talon(RobotMap.rightRearMotor);
 		leftReartSpeedController = new Talon(RobotMap.leftRearMotor);
 		
-		robotDrive = new RobotDrive(leftFrontSpeedController, leftReartSpeedController, rightFrontSpeedController, rightRearSpeedController);
+		gyro = new ADXRS450_Gyro();
+		gyro.calibrate();
+		gyro.reset();
+		
+		robotDrive = new RobotDrive(leftFrontSpeedController, leftReartSpeedController, rightFrontSpeedController,
+				rightRearSpeedController);
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
 		robotDrive.setInvertedMotor(MotorType.kRearRight, true);
 	}
@@ -43,7 +52,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 * @param rotation
 	 */
 	public void drive(double x, double y, double rotation) {
-		robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
+		robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle());
 	}
 	
 	/**
@@ -52,7 +61,8 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 */
 	public void drive(Joystick joystick) {
 		//robotDrive.mecanumDrive_Cartesian(joystick.getRawAxis(0), joystick.getRawAxis(1), joystick.getRawAxis(2), 0);
-		robotDrive.mecanumDrive_Cartesian(threshold(joystick.getRawAxis(0)), threshold(joystick.getRawAxis(1)), 0, 0);
+		robotDrive.mecanumDrive_Cartesian(threshold(joystick.getRawAxis(0)), threshold(joystick.getRawAxis(1)), 
+				threshold(joystick.getRawAxis(2)), gyro.getAngle());
 		//System.out.println("Joy 0 " + joystick.getRawAxis(0)+ " " + threshold(joystick.getRawAxis(0)));
 		//System.out.println("Joy 1 " + joystick.getRawAxis(1)+ " " + threshold(joystick.getRawAxis(0)));
 		//System.out.println(joystick.getRawAxis(2));
