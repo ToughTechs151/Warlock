@@ -17,6 +17,8 @@ public class RobotMap {
 	
 	//Pneumatics
 	public static int lowGoalSolenoid = 0;
+	public static int GearPort = 0; // DIO Port Number for Gear Control
+	public static int GearSol = 1; // Solenoid Number on PCM Module
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
