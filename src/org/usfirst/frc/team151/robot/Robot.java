@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team151.robot;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -9,7 +10,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
+import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -21,7 +25,12 @@ import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
 public class Robot extends IterativeRobot {
 
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
+	public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+	public static final RopeClimberSubsystem ropeClimberSubsystem = new RopeClimberSubsystem();
+	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
 	public static OI oi;
+	
+	//private CameraServer cameraServer = null;
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -35,8 +44,10 @@ public class Robot extends IterativeRobot {
 		System.out.println("Entering roboInit");
 		oi = new OI();
 		chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		 //chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		
+		//cameraServer = CameraServer.getInstance();
 	}
 
 	/**
