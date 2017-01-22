@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
+import org.usfirst.frc.team151.robot.subsystems.GearSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
 
 /**
@@ -21,6 +22,7 @@ import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
 public class Robot extends IterativeRobot {
 
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
+	public static final GearSubsystem gearSubsystem = new GearSubsystem();
 	public static OI oi;
 
 	Command autonomousCommand;

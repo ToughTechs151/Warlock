@@ -11,6 +11,8 @@ public class RobotMap {
 	public static int rightFrontMotor = 2;
 	public static int rightRearMotor = 3;
 	public static int leftRearMotor = 4;
+	public static int GearPort = 0; // DIO Port Number for Gear Control
+	public static int GearSol = 1; // Solenoid Number on PCM Module
 
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
