@@ -21,12 +21,12 @@ public class GearSubsystem extends Subsystem {
 		 gearDevice = new DigitalOutput(RobotMap.GearPort);
 	}
 	
-	public void GearDeposit(Joystick joystick) {
+	public void gearDeposit(Joystick joystick) {
 		//if joystick button is pressed, set true
 		gearDevice.set(true);
 	}
 
-	public void GearRetract(Joystick joystick) {
+	public void gearRetract(Joystick joystick) {
 		//if joystick button is pressed, set true
 		gearDevice.set(false);
 	}

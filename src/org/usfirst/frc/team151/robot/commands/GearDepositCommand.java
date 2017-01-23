@@ -21,7 +21,7 @@ public class GearDepositCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.gearSubsystem.GearDeposit(Robot.oi.getJoystick());
+    	Robot.gearSubsystem.gearDeposit(Robot.oi.getJoystick());
     }
 
     // Make this return true when this Command no longer needs to run execute()
