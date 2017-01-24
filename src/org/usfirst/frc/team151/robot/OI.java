@@ -13,21 +13,32 @@ import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
 public class OI {
 	Joystick joystick = null;
 	
+	private JoystickButton x = new JoystickButton(joystick, 1);
+	private JoystickButton a = new JoystickButton(joystick, 2);
+	private JoystickButton b = new JoystickButton(joystick, 3);
+	private JoystickButton y = new JoystickButton(joystick, 4);
+	private JoystickButton leftBumper = new JoystickButton(joystick, 5);
+	private  JoystickButton rightBumper = new JoystickButton(joystick, 6);
+	private JoystickButton leftTrigger = new JoystickButton(joystick, 7);
+	private JoystickButton rightTrigger = new JoystickButton(joystick, 8);
+	private JoystickButton back = new JoystickButton(joystick, 9);
+	private JoystickButton start = new JoystickButton(joystick, 10);
+	private JoystickButton leftJoyDown = new JoystickButton(joystick, 11);
+	private JoystickButton rightJoyDown = new JoystickButton(joystick, 12);		
+	
 	public OI(int joystickChannel) {		
-		joystick = new Joystick(joystickChannel);
-		
-        // Create some buttons
-        JoystickButton d_up = new JoystickButton(joystick, 5);
-        JoystickButton d_right= new JoystickButton(joystick, 6);
-        JoystickButton d_down= new JoystickButton(joystick, 7);
-        JoystickButton d_left = new JoystickButton(joystick, 8);
-        JoystickButton l2 = new JoystickButton(joystick, 9);
-        JoystickButton r2 = new JoystickButton(joystick, 10);
-        JoystickButton l1 = new JoystickButton(joystick, 11);
-        JoystickButton r1 = new JoystickButton(joystick, 12);		
+		joystick = new Joystick(joystickChannel);	
 	}
 	
     public Joystick getJoystick() {
         return joystick;
     }	
+    
+    public JoystickButton getJoystickButton(int button) {
+    	switch(button) {
+    		case 6 : return rightBumper;
+    		case 8 : return rightTrigger;
+    	}
+		return null;
+    }
 }
