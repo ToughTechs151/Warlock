@@ -21,7 +21,7 @@ public class ShootHighGoalCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooterSubsystem.shootHighGoal(Robot.oi.getJoystick());
+    	Robot.shooterSubsystem.shootHighGoal(Robot.primaryDriverOi.getJoystick());
     	
     }
 

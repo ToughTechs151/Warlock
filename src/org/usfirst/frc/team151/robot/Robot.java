@@ -30,7 +30,8 @@ public class Robot extends IterativeRobot {
 	public static final RopeClimberSubsystem ropeClimberSubsystem = new RopeClimberSubsystem();
 	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
 	public static final GearSubsystem gearSubsystem = new GearSubsystem();
-	public static OI oi;
+	public static OI primaryDriverOi = null;
+	public static OI secondaryDriverOi = null;
 	
 	//private CameraServer cameraServer = null;
 
@@ -44,7 +45,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("Entering roboInit");
-		oi = new OI();
+		primaryDriverOi = new OI(RobotMap.primaryJoystick);
+		secondaryDriverOi = new OI(RobotMap.secondaryJoystick);
 		chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
 		 //chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);

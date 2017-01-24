@@ -1,5 +1,6 @@
 package org.usfirst.frc.team151.robot.subsystems;
 
+import org.usfirst.frc.team151.robot.Robot;
 import org.usfirst.frc.team151.robot.RobotMap;
 import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
 
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.RobotDrive.MotorType;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -74,5 +76,12 @@ public class MecanumDriveSubsystem extends Subsystem {
 		else {
 			return 0.5*rawAxis;
 		}
+	}
+	
+	/**
+	 * Log information to dashboard
+	 */
+	public void log() {
+		SmartDashboard.putData("Gyro", gyro);
 	}
 }

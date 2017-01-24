@@ -23,6 +23,9 @@ public class RobotMap {
 	public static int GearPort = 0; // DIO Port Number for Gear Control
 	public static int GearSol = 1; // Solenoid Number on PCM Module
 
+	public static int primaryJoystick = 0;
+	public static int secondaryJoystick = 1;
+	
 	//public static SPI.Port SPI_port_Gyro = new SPI.Port(0);
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
