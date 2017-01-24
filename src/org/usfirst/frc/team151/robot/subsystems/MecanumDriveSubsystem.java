@@ -70,12 +70,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 	}
 	
 	public double threshold (double rawAxis) {
-		if (Math.abs(rawAxis) < 0.04) {
-			return 0;
-		}
-		else {
-			return 0.5*rawAxis;
-		}
+		return 0.5*rawAxis;
 	}
 	
 	/**
