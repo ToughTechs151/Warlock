@@ -41,7 +41,7 @@ public class OI {
     		case 3: return b;
     		case 4: return y;
     		case 5: return leftBumper;
-    		case 6 : return rightBumper;
+    		case 6 : return rightBumper; 
     		case 7: return leftTrigger;
     		case 8 : return rightTrigger;
     		case 9: return back;
