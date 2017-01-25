@@ -36,8 +36,18 @@ public class OI {
     
     public JoystickButton getJoystickButton(int button) {
     	switch(button) {
+    		case 1: return x;
+    		case 2: return a;
+    		case 3: return b;
+    		case 4: return y;
+    		case 5: return leftBumper;
     		case 6 : return rightBumper;
+    		case 7: return leftTrigger;
     		case 8 : return rightTrigger;
+    		case 9: return back;
+    		case 10: return start;
+    		case 11: return leftJoyDown;
+    		case 12: return rightJoyDown;
     	}
 		return null;
     }
