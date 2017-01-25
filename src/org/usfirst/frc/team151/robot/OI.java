@@ -25,18 +25,18 @@ public class OI {
 	
 	public OI(int joystickChannel) {		
 		joystick = new Joystick(joystickChannel);	
-		JoystickButton x = new JoystickButton(joystick, 1);
-		JoystickButton a = new JoystickButton(joystick, 2);
-		JoystickButton b = new JoystickButton(joystick, 3);
-		JoystickButton y = new JoystickButton(joystick, 4);
-		JoystickButton leftBumper = new JoystickButton(joystick, 5);
-		JoystickButton rightBumper = new JoystickButton(joystick, 6);
-		JoystickButton leftTrigger = new JoystickButton(joystick, 7);
-		JoystickButton rightTrigger = new JoystickButton(joystick, 8);
-		JoystickButton back = new JoystickButton(joystick, 9);
-		JoystickButton start = new JoystickButton(joystick, 10);
-		JoystickButton leftJoyDown = new JoystickButton(joystick, 11);
-		JoystickButton rightJoyDown = new JoystickButton(joystick, 12);		
+		x = new JoystickButton(joystick, 1);
+		a = new JoystickButton(joystick, 2);
+		b = new JoystickButton(joystick, 3);
+		y = new JoystickButton(joystick, 4);
+		leftBumper = new JoystickButton(joystick, 5);
+		rightBumper = new JoystickButton(joystick, 6);
+		leftTrigger = new JoystickButton(joystick, 7);
+		rightTrigger = new JoystickButton(joystick, 8);
+		back = new JoystickButton(joystick, 9);
+		start = new JoystickButton(joystick, 10);
+		leftJoyDown = new JoystickButton(joystick, 11);
+		rightJoyDown = new JoystickButton(joystick, 12);		
 	}
 	
     public Joystick getJoystick() {
