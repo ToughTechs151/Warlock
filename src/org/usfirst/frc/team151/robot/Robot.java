@@ -50,6 +50,7 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
 		 //chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData(Robot.ropeClimberSubsystem);
 		
 		//cameraServer = CameraServer.getInstance();
 	}

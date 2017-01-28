@@ -4,6 +4,7 @@ import org.usfirst.frc.team151.robot.commands.ClimbRopeCommand;
 import org.usfirst.frc.team151.robot.commands.GearDepositCommand;
 import org.usfirst.frc.team151.robot.commands.GearRetractCommand;
 import org.usfirst.frc.team151.robot.commands.ShootHighGoalCommand;
+import org.usfirst.frc.team151.robot.commands.StopRopeCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -50,6 +51,7 @@ public class OI {
 			b.whenPressed(new GearDepositCommand());
 			//TODO right now, both commands in the commandGroup do the same thing
 			y.whenPressed(new ClimbRopeCommand());
+			a.whenPressed(new StopRopeCommand());
 //			y.whenPressed(new RopeClimberCommandGroup());
 			rightTrigger.whenPressed(new ShootHighGoalCommand());
 			rightBumper.whenPressed(new ShootHighGoalCommand());

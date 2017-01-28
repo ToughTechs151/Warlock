@@ -7,11 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClimbRopeCommand extends Command {
+public class StopRopeCommand extends Command {
 
-	private boolean isClimbFinished = false;
-	
-    public ClimbRopeCommand() {
+    public StopRopeCommand() {
     	requires(Robot.ropeClimberSubsystem);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -19,22 +17,22 @@ public class ClimbRopeCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.ropeClimberSubsystem.climbRope(Robot.secondaryDriverOi.getJoystick());
-    	isClimbFinished = true;
+    	Robot.ropeClimberSubsystem.stopRope();
+    	System.out.println("stopRope executed");
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return isClimbFinished;
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	//TODO add end code here
     }
 
     // Called when another command which requires one or more of the same
