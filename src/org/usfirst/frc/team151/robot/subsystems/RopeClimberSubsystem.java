@@ -7,6 +7,7 @@ import org.usfirst.frc.team151.robot.commands.RopeClimberCommandGroup;
 
 import org.usfirst.frc.team151.robot.RobotMap;
 
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Relay;
 
@@ -15,13 +16,13 @@ import edu.wpi.first.wpilibj.Relay;
  */
 public class RopeClimberSubsystem extends Subsystem {
 	
-//	Relay relayRopeClimber = null;
+	DigitalOutput diOutRopeClimber = null;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
 	public RopeClimberSubsystem() {
-//		relayRopeClimber = new Relay(RobotMap.relayRopeClimber);
+		diOutRopeClimber = new DigitalOutput(RobotMap.digOutRopeClimber);
 	}
 	
     public void initDefaultCommand() {
@@ -30,18 +31,14 @@ public class RopeClimberSubsystem extends Subsystem {
         //setDefaultCommand(new MySpecialCommand());
     }
     
-    public void reverseRope(Joystick joystick) {
-//    	relayRopeClimber.set(Relay.Value.kReverse);
-    }
-    
     public void climbRope(Joystick joystick) {
-//    	if(!relayRopeClimber.get().equals(Relay.Value.kForward)) {
-//    		relayRopeClimber.set(Relay.Value.kForward);
-//    	}
+    	if(diOutRopeClimber.get() == false) {
+    		diOutRopeClimber.set(true);
+    	}
     }
     
     public void stopRope(Joystick joystick) {
-//    	relayRopeClimber.set(Relay.Value.kOff);
+    	diOutRopeClimber.set(false);
     }
 }
 
