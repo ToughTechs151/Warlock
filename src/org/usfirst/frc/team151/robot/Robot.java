@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
 	
-	private CameraServer cameraServer = null;
+//	private CameraServer cameraServer = null;
 
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
@@ -57,8 +57,8 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData(Robot.ropeClimberSubsystem);
 		
-		cameraServer = CameraServer.getInstance();
-		cameraServer.startAutomaticCapture();
+	//	cameraServer = CameraServer.getInstance();
+	//	cameraServer.startAutomaticCapture();
 	}
 
 	/**
