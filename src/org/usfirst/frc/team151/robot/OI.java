@@ -16,33 +16,33 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 public class OI {
 	Joystick joystick = null;
 	
-	private JoystickButton x = null;
-	private JoystickButton a = null;
-	private JoystickButton b = null;
-	private JoystickButton y = null;
-	private JoystickButton leftBumper = null;
-	private  JoystickButton rightBumper = null;
-	private JoystickButton leftTrigger = null;
-	private JoystickButton rightTrigger = null;
-	private JoystickButton back = null;
-	private JoystickButton start = null;
-	private JoystickButton leftJoyDown = null;
-	private JoystickButton rightJoyDown = null;	
+	protected JoystickButton x;
+	protected JoystickButton a;
+	protected JoystickButton b;
+	protected JoystickButton y;
+	protected JoystickButton leftBumper;
+	protected  JoystickButton rightBumper;
+	protected JoystickButton leftTrigger;
+	protected JoystickButton rightTrigger;
+	protected JoystickButton back;
+	protected JoystickButton start;
+	protected JoystickButton leftJoyDown;
+	protected JoystickButton rightJoyDown;	
 	
 	public OI(int joystickChannel) {		
 		joystick = new Joystick(joystickChannel);	
-		x = new JoystickButton(joystick, 1);
-		a = new JoystickButton(joystick, 2);
-		b = new JoystickButton(joystick, 3);
-		y = new JoystickButton(joystick, 4);
-		leftBumper = new JoystickButton(joystick, 5);
-		rightBumper = new JoystickButton(joystick, 6);
-		leftTrigger = new JoystickButton(joystick, 7);
-		rightTrigger = new JoystickButton(joystick, 8);
-		back = new JoystickButton(joystick, 9);
-		start = new JoystickButton(joystick, 10);
-		leftJoyDown = new JoystickButton(joystick, 11);
-		rightJoyDown = new JoystickButton(joystick, 12);	
+		x = null;
+		a = null;
+		b = null;
+		y = null;
+		leftBumper = null;
+		rightBumper = null;
+		leftTrigger = null;
+		rightTrigger = null;
+		back = null;
+		start = null;
+		leftJoyDown = null;
+		rightJoyDown = null;	
 		if(joystickChannel == 0) {
 //			leftTrigger.whenPressed(new SpinPinCommand());
 			//TODO left trigger: rolling pin spins

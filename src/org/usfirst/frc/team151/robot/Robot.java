@@ -30,13 +30,13 @@ public class Robot extends IterativeRobot {
 	public static final RopeClimberSubsystem ropeClimberSubsystem = new RopeClimberSubsystem();
 	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
 	public static final GearSubsystem gearSubsystem = new GearSubsystem();
-	public static OI primaryDriverOi = null;
-	public static OI secondaryDriverOi = null;
+	public static DriverOI primaryDriverOi = null;
+	public static CoDriverOI secondaryDriverOi = null;
 	
 	//private CameraServer cameraServer = null;
 
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	//SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -45,11 +45,11 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("Entering roboInit");
-		primaryDriverOi = new OI(RobotMap.primaryJoystick);
-		secondaryDriverOi = new OI(RobotMap.secondaryJoystick);
-		chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
+		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
+		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
+		//chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
 		 //chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		//SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData(Robot.ropeClimberSubsystem);
 		
 		//cameraServer = CameraServer.getInstance();
@@ -83,7 +83,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		//autonomousCommand = chooser.getSelected();
 
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
