@@ -1,21 +1,24 @@
 
 package org.usfirst.frc.team151.robot;
 
-import edu.wpi.first.wpilibj.CameraServer;
+import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
+import org.usfirst.frc.team151.robot.commands.DumpLowGoalCommand;
+import org.usfirst.frc.team151.robot.commands.DumpLowGoalCommand;
+import org.usfirst.frc.team151.robot.commands.GearRetractCommand;
+import org.usfirst.frc.team151.robot.commands.ShootHighGoalCommand;
+import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.GearSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
-import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
-import org.usfirst.frc.team151.robot.subsystems.GearSubsystem;
-import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
-import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
-import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
-import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
