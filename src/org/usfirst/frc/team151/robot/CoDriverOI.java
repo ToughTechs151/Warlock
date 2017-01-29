@@ -28,7 +28,7 @@ public class CoDriverOI extends OI{
 		b.whenPressed(new GearDepositCommand());
 		//TODO right now, both commands in the commandGroup do the same thing
 		y.whenPressed(new ClimbRopeCommand());
-		a.whenPressed(new StopRopeCommand());
+//		a.whenPressed(new StopRopeCommand());
 //		y.whenPressed(new RopeClimberCommandGroup());
 		rightTrigger.whenPressed(new ShootHighGoalCommand());
 		rightBumper.whenPressed(new ShootHighGoalCommand());
