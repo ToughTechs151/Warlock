@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
+import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.GearSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
@@ -30,10 +31,11 @@ public class Robot extends IterativeRobot {
 	public static final RopeClimberSubsystem ropeClimberSubsystem = new RopeClimberSubsystem();
 	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
 	public static final GearSubsystem gearSubsystem = new GearSubsystem();
+	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
 	
-	//private CameraServer cameraServer = null;
+	private CameraServer cameraServer = null;
 
 	Command autonomousCommand;
 	//SendableChooser<Command> chooser = new SendableChooser<>();
@@ -52,7 +54,8 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData(Robot.ropeClimberSubsystem);
 		
-		//cameraServer = CameraServer.getInstance();
+		cameraServer = CameraServer.getInstance();
+		cameraServer.startAutomaticCapture();
 	}
 
 	/**
