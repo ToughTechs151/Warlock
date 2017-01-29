@@ -31,7 +31,7 @@ public class OI {
 	
 	public OI(int joystickChannel) {		
 		joystick = new Joystick(joystickChannel);	
-		x = null;
+		x = null; 
 		a = null;
 		b = null;
 		y = null;

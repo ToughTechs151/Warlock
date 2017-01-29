@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  *
  */
 public class CoDriverOI extends OI{
-
+ 
 	public CoDriverOI(int joystickChannel) {
 		super(joystickChannel);
 		// TODO Auto-generated constructor stub

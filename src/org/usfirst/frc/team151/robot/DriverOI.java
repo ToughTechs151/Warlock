@@ -5,7 +5,7 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 /**
  * 
  * This class encapsulates the logics to manage the primary driver Joystick controls
- *
+ * 
  */
 public class DriverOI extends OI{
 
