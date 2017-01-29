@@ -4,6 +4,7 @@ import org.usfirst.frc.team151.robot.commands.ClimbRopeCommand;
 import org.usfirst.frc.team151.robot.commands.GearDepositCommand;
 import org.usfirst.frc.team151.robot.commands.GearRetractCommand;
 import org.usfirst.frc.team151.robot.commands.ShootHighGoalCommand;
+import org.usfirst.frc.team151.robot.commands.PickUpCommand;
 import org.usfirst.frc.team151.robot.commands.StopRopeCommand;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -43,24 +44,6 @@ public class OI {
 		start = null;
 		leftJoyDown = null;
 		rightJoyDown = null;	
-		if(joystickChannel == 0) {
-//			leftTrigger.whenPressed(new SpinPinCommand());
-			//TODO left trigger: rolling pin spins
-		} else if(joystickChannel == 1) {
-			x.whenPressed(new GearRetractCommand());
-			b.whenPressed(new GearDepositCommand());
-			//TODO right now, both commands in the commandGroup do the same thing
-			y.whenPressed(new ClimbRopeCommand());
-			a.whenPressed(new StopRopeCommand());
-//			y.whenPressed(new RopeClimberCommandGroup());
-			rightTrigger.whenPressed(new ShootHighGoalCommand());
-			rightBumper.whenPressed(new ShootHighGoalCommand());
-			//TODO figure out which commands to call
-			/*
-			 * right trigger: shoot
-			 * right bumper: toggle shooter motor
-			 */
-		}
 	}
 	
     public Joystick getJoystick() {
