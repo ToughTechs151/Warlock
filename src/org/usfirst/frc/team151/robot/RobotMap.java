@@ -17,6 +17,7 @@ public class RobotMap {
 	public static int leftRearMotor = 4;
 	public static int shooterMotor = 5;
 	public static int digOutRopeClimber = 6;
+	public static int spinBallPickup = 7;
 	
 	//Pneumatics-Analog Channel
 	public static int lowGoalSolenoid = 0;
