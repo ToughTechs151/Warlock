@@ -13,6 +13,7 @@ import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -38,10 +39,10 @@ public class Robot extends IterativeRobot {
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
 	
-//	private CameraServer cameraServer = null;
+	private CameraServer cameraServer = null;
 
 	Command autonomousCommand;
-	//SendableChooser<Command> chooser = new SendableChooser<>();
+	SendableChooser<Command> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -57,8 +58,8 @@ public class Robot extends IterativeRobot {
 		//SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData(Robot.ropeClimberSubsystem);
 		
-	//	cameraServer = CameraServer.getInstance();
-	//	cameraServer.startAutomaticCapture();
+		cameraServer = CameraServer.getInstance();
+		cameraServer.startAutomaticCapture();
 	}
 
 	/**
