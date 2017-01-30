@@ -4,7 +4,7 @@ import org.usfirst.frc.team151.robot.commands.ClimbRopeCommand;
 import org.usfirst.frc.team151.robot.commands.GearDepositCommand;
 import org.usfirst.frc.team151.robot.commands.GearRetractCommand;
 import org.usfirst.frc.team151.robot.commands.ShootHighGoalCommand;
-import org.usfirst.frc.team151.robot.commands.StopRopeCommand;
+//import org.usfirst.frc.team151.robot.commands.StopRopeCommand;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
