@@ -22,6 +22,7 @@ import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
 import edu.wpi.cscore.CvSink;
 import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
+import edu.wpi.cscore.VideoSource;
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -50,9 +51,16 @@ public class Robot extends IterativeRobot {
 	public static CoDriverOI secondaryDriverOi = null;
 	
 	private CameraServer cameraServer = null;
-
+	
+	public enum AutoModes {
+		AutoGear,
+		AutoHighGoal,
+		AutoLowGoal
+		}
+	
 	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	
+	private SendableChooser autoChooser = new SendableChooser();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -63,7 +71,10 @@ public class Robot extends IterativeRobot {
 		System.out.println("Entering roboInit");
 		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
-		//chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
+		autoChooser.addDefault("Default Auto", new DriveWithJoystickCommand());
+		autoChooser.addDefault("AutoGear", AutoModes.AutoGear);
+		autoChooser.addObject("AutoHighGoal", AutoModes.AutoHighGoal);
+		autoChooser.addObject("AutoLowGoal", AutoModes.AutoLowGoal);
 		 //chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData(Robot.ropeClimberSubsystem);
@@ -72,7 +83,8 @@ public class Robot extends IterativeRobot {
 //		cameraServer.startAutomaticCapture();
 		visionThread = new Thread(() -> {
 			// Get the UsbCamera from CameraServer
-			UsbCamera camera = CameraServer.getInstance().startAutomaticCapture();
+			UsbCamera camera = CameraServer.getInstance();
+			camera.startAutomaticCapture();
 			// Set the resolution
 			camera.setResolution(640, 480);
 
@@ -131,18 +143,40 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		//autonomousCommand = chooser.getSelected();
+		autonomousCommand = autoChooser.getSelected();
+
+		AutoModes autoSelected = (AutoModes)autoChooser.getSelected();
+		        switch(autoSelected)  {
+		        case AutoHighGoal:
+		        autonomousCommand = new ShootHighGoalCommand();
+		        break;
+		        case AutoLowGoal:
+		        autonomousCommand = new DumpLowGoalCommand();
+		        break;
+		        case AutoGear:
+		        autonomousCommand = new GearRetractCommand();
+		        break;
+		        }
 
 		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
+
+		* String autoSelected = SmartDashboard.getString("Auto Selector",
+
+		* "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
+
+		* = new MyAutoCommand(); break; case "Default Auto": default:
+
+		* autonomousCommand = new ExampleCommand(); break; }
+
+		*/
+
+
 
 		// schedule the autonomous command (example)
+
 		if (autonomousCommand != null)
-			autonomousCommand.start();
+
+		autonomousCommand.start();
 	}
 
 	/**
