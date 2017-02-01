@@ -22,7 +22,7 @@ public class RobotMap {
 	//Pneumatics-Analog Channel
 	public static int lowGoalSolenoid = 0;
 	public static int GearPort = 0; // DIO Port Number for Gear Control
-	public static int ropeLimitSwitch = 0;
+	public static int ropeLimitSwitch = 9;
 	public static int GearSol = 1; // Solenoid Number on PCM Module
 
 	public static int primaryJoystick = 0;

@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.Relay;
 public class RopeClimberSubsystem extends Subsystem {
 	
 	DigitalOutput diOutRopeClimber = null;
-	AnalogInput ropeLimitSwitch = null;
+	DigitalInput ropeLimitSwitch = null;
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -28,7 +28,7 @@ public class RopeClimberSubsystem extends Subsystem {
 	public RopeClimberSubsystem() {
 		diOutRopeClimber = new DigitalOutput(RobotMap.digOutRopeClimber);
 		diOutRopeClimber.set(false);
-		ropeLimitSwitch = new AnalogInput(RobotMap.ropeLimitSwitch);
+		ropeLimitSwitch = new DigitalInput(RobotMap.ropeLimitSwitch);
 	} 
 	
     public void initDefaultCommand() {
@@ -44,7 +44,7 @@ public class RopeClimberSubsystem extends Subsystem {
     }
     
     public void stopRope() {
-    	if(ropeLimitSwitch.getVoltage() > 0.5) {
+    	if(!ropeLimitSwitch.get()) {
     		if(diOutRopeClimber.get())
     			diOutRopeClimber.set(false);
     	}
