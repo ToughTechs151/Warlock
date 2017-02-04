@@ -66,6 +66,7 @@ public class Robot extends IterativeRobot {
 		 //chooser.addObject("My Auto", new MyAutoCommand());
 		//SmartDashboard.putData("Auto mode", chooser);
 		SmartDashboard.putData(Robot.ropeClimberSubsystem);
+		SmartDashboard.putData("Gyro", mecanumDriveSubsystem.gyro);
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
