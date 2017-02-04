@@ -16,15 +16,18 @@ public class RobotMap {
 	public static int rightRearMotor = 3;
 	public static int leftRearMotor = 4;
 	public static int shooterMotor = 5;
-	public static int digOutRopeClimber = 6;
 	public static int spinBallPickup = 7;
 	
 	//Pneumatics-Analog Channel
 	public static int lowGoalSolenoid = 0;
-	public static int GearPort = 0; // DIO Port Number for Gear Control
 	public static int ropeLimitSwitch = 9;
 	public static int GearSol = 1; // Solenoid Number on PCM Module
 
+	
+	//Relay ports
+	public static int digOutRopeClimber = 0; //Relay port
+	public static int GearPort = 1; // Relay Port Number for Gear Control
+	
 	public static int primaryJoystick = 0;
 	public static int secondaryJoystick = 1;
 	
