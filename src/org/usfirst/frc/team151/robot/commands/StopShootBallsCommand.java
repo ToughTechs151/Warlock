@@ -1,14 +1,17 @@
 package org.usfirst.frc.team151.robot.commands;
 
+import org.usfirst.frc.team151.robot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-import org.usfirst.frc.team151.robot.Robot;
 /**
  *
  */
-public class LocateTargetCommand extends Command {
+public class StopShootBallsCommand extends Command {
+	
+	private boolean isStop = false;
 
-    public LocateTargetCommand() {
+    public StopShootBallsCommand() {
     	requires(Robot.shooterSubsystem);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -20,17 +23,17 @@ public class LocateTargetCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooterSubsystem.locateTarget(Robot.primaryDriverOi.getJoystick());
+    	Robot.shooterSubsystem.stopShootBalls();
+    	isStop = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isStop;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	//TODO set motor to 0
     }
 
     // Called when another command which requires one or more of the same

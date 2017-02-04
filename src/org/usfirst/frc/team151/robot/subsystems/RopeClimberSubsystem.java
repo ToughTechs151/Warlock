@@ -40,10 +40,8 @@ public class RopeClimberSubsystem extends Subsystem {
     }
     
     public void climbRope(Joystick joystick) {
-    	System.out.println("current output is " + diOutRopeClimber.get());
     	if(diOutRopeClimber.get() != Value.kForward) {
     		diOutRopeClimber.set(Value.kForward);
-    		System.out.println("current output is now " + diOutRopeClimber.get());
     		Scheduler.getInstance().add(new StopRopeCommand());
     	}    	
     }

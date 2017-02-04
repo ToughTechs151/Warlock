@@ -27,6 +27,7 @@ public class RobotMap {
 	//Relay ports
 	public static int digOutRopeClimber = 0; //Relay port
 	public static int GearPort = 1; // Relay Port Number for Gear Control
+	public static int shooterAgitator = 1;
 	
 	public static int primaryJoystick = 0;
 	public static int secondaryJoystick = 1;

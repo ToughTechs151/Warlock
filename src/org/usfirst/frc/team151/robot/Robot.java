@@ -1,28 +1,28 @@
 
 package org.usfirst.frc.team151.robot;
 
-import java.awt.Color;
-
-import org.opencv.core.Mat;
-import org.opencv.core.Point;
-import org.opencv.core.Scalar;
-import org.opencv.imgproc.Imgproc;
-import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
-import org.usfirst.frc.team151.robot.commands.DumpLowGoalCommand;
-import org.usfirst.frc.team151.robot.commands.DumpLowGoalCommand;
-import org.usfirst.frc.team151.robot.commands.GearRetractCommand;
-import org.usfirst.frc.team151.robot.commands.ShootHighGoalCommand;
+//import java.awt.Color;
+//
+//import org.opencv.core.Mat;
+//import org.opencv.core.Point;
+//import org.opencv.core.Scalar;
+//import org.opencv.imgproc.Imgproc;
+//import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
+//import org.usfirst.frc.team151.robot.commands.DumpLowGoalCommand;
+//import org.usfirst.frc.team151.robot.commands.DumpLowGoalCommand;
+//import org.usfirst.frc.team151.robot.commands.GearRetractCommand;
 import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.GearSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
 
-import edu.wpi.cscore.CvSink;
-import edu.wpi.cscore.CvSource;
-import edu.wpi.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.CameraServer;
+//import edu.wpi.cscore.CvSink;
+//import edu.wpi.cscore.CvSource;
+//import edu.wpi.cscore.UsbCamera;
+//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -44,6 +44,7 @@ public class Robot extends IterativeRobot {
 	public static final RopeClimberSubsystem ropeClimberSubsystem = new RopeClimberSubsystem();
 	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
 	public static final GearSubsystem gearSubsystem = new GearSubsystem();
+	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
 	public static final BaseVision visionProcessing = new BaseVision();
 	public static DriverOI primaryDriverOi = null;

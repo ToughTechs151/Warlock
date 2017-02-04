@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 
 import org.usfirst.frc.team151.robot.RobotMap;
 
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 
@@ -13,9 +13,19 @@ import edu.wpi.first.wpilibj.Talon;
  */
 public class ShooterSubsystem extends Subsystem {
 	private SpeedController wheelSpinner = null;
+	private Encoder wheelEncoder = null;
+	
+	private static int channel1 = 0;
+	private static int channel2 = 1;
+	
+	//pulses 1440 pulses per rev
+	private double distancePerPulse = 0.01963194; //TODO need to change this, in inches
 	
 	public ShooterSubsystem() {
 		wheelSpinner = new Talon(RobotMap.shooterMotor);
+		wheelEncoder = new Encoder(channel1, channel2);
+		wheelEncoder.reset();
+		wheelEncoder.setDistancePerPulse(distancePerPulse);
 	}
 
 
@@ -26,16 +36,18 @@ public class ShooterSubsystem extends Subsystem {
     	//setDefaultCommand(new )
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
+    	
     }
 	
+    public void getEncoderSpeed() {
+    	wheelEncoder.getRate();
+    }
     
+    public void stopShootBalls() {
+    	wheelSpinner.set(0.0);
+    }
     
-	public void locateTarget(Joystick joystick) {
-		//TODO put locateTarget code here
-	}
-	
-	public void shootHighGoal(Joystick joystick) {
-		//TODO put shootHighGoal code here
-	}
+    public void shootBalls() {
+    	wheelSpinner.set(1.0); //TODO change speed (do math), use algorithm to set speed
+    }
 }
-

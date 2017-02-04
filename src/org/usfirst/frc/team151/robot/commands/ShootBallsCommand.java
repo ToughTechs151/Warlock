@@ -7,9 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ShootHighGoalCommand extends Command {
+public class ShootBallsCommand extends Command {
+	
+	private boolean isShoot = true;
 
-    public ShootHighGoalCommand() {
+    public ShootBallsCommand() {
     	requires(Robot.shooterSubsystem);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -21,18 +23,17 @@ public class ShootHighGoalCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.shooterSubsystem.shootHighGoal(Robot.primaryDriverOi.getJoystick());
-    	
+    	Robot.shooterSubsystem.shootBalls();
+    	isShoot = true;
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return isShoot;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	//TODO set motor to 0
     }
 
     // Called when another command which requires one or more of the same

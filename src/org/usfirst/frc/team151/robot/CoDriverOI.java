@@ -3,8 +3,12 @@ package org.usfirst.frc.team151.robot;
 import org.usfirst.frc.team151.robot.commands.ClimbRopeCommand;
 import org.usfirst.frc.team151.robot.commands.GearDepositCommand;
 import org.usfirst.frc.team151.robot.commands.GearRetractCommand;
-import org.usfirst.frc.team151.robot.commands.ShootHighGoalCommand;
-//import org.usfirst.frc.team151.robot.commands.StopRopeCommand;
+import org.usfirst.frc.team151.robot.commands.ReverseAgitatorCommand;
+import org.usfirst.frc.team151.robot.commands.ShootBallsCommand;
+import org.usfirst.frc.team151.robot.commands.StartAgitatorCommand;
+import org.usfirst.frc.team151.robot.commands.StopAgitatorCommand;
+import org.usfirst.frc.team151.robot.commands.StopRopeCommand;
+import org.usfirst.frc.team151.robot.commands.StopShootBallsCommand;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -21,22 +25,23 @@ public class CoDriverOI extends OI{
 		x = new JoystickButton(joystick, 1);
 		b = new JoystickButton(joystick, 3);
 		y = new JoystickButton(joystick, 4);
+//		a = new JoystickButton(joystick, 2);
 		rightBumper = new JoystickButton(joystick, 6);
 		rightTrigger = new JoystickButton(joystick, 8);
+		leftBumper = new JoystickButton(joystick, 5);
+		leftTrigger = new JoystickButton(joystick, 7);
 		
 		x.whenPressed(new GearRetractCommand());
 		b.whenPressed(new GearDepositCommand());
-		//TODO right now, both commands in the commandGroup do the same thing
 		y.whenPressed(new ClimbRopeCommand());
 //		a.whenPressed(new StopRopeCommand());
-//		y.whenPressed(new RopeClimberCommandGroup());
-		rightTrigger.whenPressed(new ShootHighGoalCommand());
-		rightBumper.whenPressed(new ShootHighGoalCommand());
-		//TODO figure out which commands to call
-		/*
-		 * right trigger: shoot
-		 * right bumper: toggle shooter motor
-		 */
+		rightTrigger.whenPressed(new ShootBallsCommand());
+		rightBumper.whenPressed(new StopShootBallsCommand());
+		leftTrigger.whenPressed(new StartAgitatorCommand());
+		leftTrigger.whenReleased(new StopAgitatorCommand());
+		leftBumper.whenPressed(new ReverseAgitatorCommand());
+		leftBumper.whenReleased(new StopAgitatorCommand());
+//		rightTrigger.whenReleased(new StopShootBallsCommand());
 	}
 	
 	
