@@ -19,7 +19,7 @@ public class RobotMap {
 	public static int spinBallPickup = 7;
 	
 	//Pneumatics-Analog Channel
-	public static int lowGoalSolenoid = 0;
+	public static int lowGoalSolenoid = 0; 
 	public static int ropeLimitSwitch = 9;
 	public static int GearSol = 1; // Solenoid Number on PCM Module
 

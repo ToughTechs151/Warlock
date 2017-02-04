@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
 	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
 	public static final GearSubsystem gearSubsystem = new GearSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
-//	public static final BaseVision visionProcessing = new BaseVision();
+	public static final BaseVision visionProcessing = new BaseVision();
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
 

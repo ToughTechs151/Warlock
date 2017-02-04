@@ -12,7 +12,7 @@ import org.usfirst.frc.team151.robot.RobotMap;
  *
  */
 public class GearSubsystem extends Subsystem {
-	private Relay gearDevice = null;
+	private Relay gearDevice = null; 
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.

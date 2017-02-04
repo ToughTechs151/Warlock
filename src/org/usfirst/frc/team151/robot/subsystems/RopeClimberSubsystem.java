@@ -50,7 +50,7 @@ public class RopeClimberSubsystem extends Subsystem {
     
     public void stopRope() { 
     	if(!ropeLimitSwitch.get()) {
-    		if(diOutRopeClimber.get() == Value.kForward)
+    		if(diOutRopeClimber.get() == Value.kForward) 
     			diOutRopeClimber.set(Value.kOff);
     	}
     }
