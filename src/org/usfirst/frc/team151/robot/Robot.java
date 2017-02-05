@@ -29,6 +29,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+	public enum AutoModes {
+		AutoGear,
+		AutoHighGoal,
+		AutoLowGoal
+		}
 
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
 	public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
@@ -49,12 +55,6 @@ public class Robot extends IterativeRobot {
 	double accelX;
 	double accelY;
 	double accelZ;
-	
-	public enum AutoModes {
-		AutoGear,
-		AutoHighGoal,
-		AutoLowGoal
-		}
 
 	private Command autonomousCommand;
 
