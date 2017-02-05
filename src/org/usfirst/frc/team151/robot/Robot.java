@@ -1,16 +1,6 @@
 
 package org.usfirst.frc.team151.robot;
 
-//import java.awt.Color;
-//
-//import org.opencv.core.Mat;
-//import org.opencv.core.Point;
-//import org.opencv.core.Scalar;
-//import org.opencv.imgproc.Imgproc;
-//import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
-//import org.usfirst.frc.team151.robot.commands.DumpLowGoalCommand;
-//import org.usfirst.frc.team151.robot.commands.DumpLowGoalCommand;
-//import org.usfirst.frc.team151.robot.commands.GearRetractCommand;
 import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.GearSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
@@ -23,10 +13,6 @@ import org.usfirst.frc.team151.robot.commands.ShootBallsCommand;
 import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
-//import edu.wpi.cscore.CvSink;
-//import edu.wpi.cscore.CvSource;
-//import edu.wpi.cscore.UsbCamera;
-//import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -51,7 +37,8 @@ public class Robot extends IterativeRobot {
 	public static final GearSubsystem gearSubsystem = new GearSubsystem();
 	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
-	public static final BaseVision visionProcessing = new BaseVision();
+//	public static final GearVision gearVision = new GearVision(0);
+//	public static final ShooterVision shooterVision = new ShooterVision(1);
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
 	
@@ -69,8 +56,7 @@ public class Robot extends IterativeRobot {
 		AutoLowGoal
 		}
 
-	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	private Command autonomousCommand;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -81,21 +67,17 @@ public class Robot extends IterativeRobot {
 		System.out.println("Entering roboInit");
 		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
-		chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
 		autoChooser.addDefault("AutoGear", AutoModes.AutoGear);
 		autoChooser.addObject("AutoHighGoal", AutoModes.AutoHighGoal);
 		autoChooser.addObject("AutoLowGoal", AutoModes.AutoLowGoal);
 		 //chooser.addObject("My Auto", new MyAutoCommand());
-		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auto mode", autoChooser);
 		SmartDashboard.putData("Mecanum Drive", mecanumDriveSubsystem);
 		SmartDashboard.putData(Robot.ropeClimberSubsystem);
 		//SmartDashboard.putData("Gyro", mecanumDriveSubsystem.gyro);
 		//TODO test with actual robot
 //		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
 //		mecanumDriveSubsystem.gyro.startLiveWindowMode();
-//		SmartDashboard.putNumber("Accelerometer X-Value", accelX);
-//		SmartDashboard.putNumber("Accelerometer Y-Value", accelY);
-//		SmartDashboard.putNumber("Accelerometer Z-Value", accelZ);
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -125,23 +107,15 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
-
 		AutoModes autoSelected = (AutoModes)autoChooser.getSelected();
-		        switch(autoSelected)  {
-		        case AutoHighGoal:
-		        autonomousCommand = new ShootBallsCommand();
-		        break;
-		        case AutoLowGoal:
-		        autonomousCommand = new DumpLowGoalCommand();
-		        break;
+			switch(autoSelected)  {
+		    case AutoHighGoal:
+		    autonomousCommand = new ShootBallsCommand();
+		    break;
+		    case AutoLowGoal:
+		    autonomousCommand = new DumpLowGoalCommand();
+		    break;
 		        }
-		/*
-		 * String autoSelected = SmartDashboard.getString("Auto Selector",
-		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
-		 * = new MyAutoCommand(); break; case "Default Auto": default:
-		 * autonomousCommand = new ExampleCommand(); break; }
-		 */
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)

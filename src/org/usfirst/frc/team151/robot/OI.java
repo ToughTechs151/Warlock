@@ -1,9 +1,5 @@
 package org.usfirst.frc.team151.robot;
 
-import org.usfirst.frc.team151.robot.commands.ClimbRopeCommand;
-import org.usfirst.frc.team151.robot.commands.PickUpCommand;
-import org.usfirst.frc.team151.robot.commands.StopRopeCommand;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
