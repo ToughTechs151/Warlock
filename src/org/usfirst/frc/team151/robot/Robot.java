@@ -42,7 +42,7 @@ public class Robot extends IterativeRobot {
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
 	
-	private SendableChooser autoChooser = new SendableChooser();
+	private SendableChooser <AutoModes> autoChooser = new SendableChooser<AutoModes>();
 	
 	Accelerometer accel = new BuiltInAccelerometer();
 	

@@ -1,10 +1,7 @@
 package org.usfirst.frc.team151.robot.subsystems;
 
 import org.usfirst.frc.team151.robot.RobotMap;
-import org.usfirst.frc.team151.robot.commands.PickUpCommand;
-import org.usfirst.frc.team151.robot.commands.StopPickupCommand;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
