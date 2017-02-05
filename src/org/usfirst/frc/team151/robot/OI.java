@@ -1,8 +1,6 @@
 package org.usfirst.frc.team151.robot;
 
 import org.usfirst.frc.team151.robot.commands.ClimbRopeCommand;
-import org.usfirst.frc.team151.robot.commands.GearDepositCommand;
-import org.usfirst.frc.team151.robot.commands.GearRetractCommand;
 import org.usfirst.frc.team151.robot.commands.PickUpCommand;
 import org.usfirst.frc.team151.robot.commands.StopRopeCommand;
 

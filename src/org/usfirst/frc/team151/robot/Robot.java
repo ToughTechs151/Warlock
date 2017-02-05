@@ -17,8 +17,12 @@ import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
+import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
+import org.usfirst.frc.team151.robot.commands.DumpLowGoalCommand;
+import org.usfirst.frc.team151.robot.commands.ShootBallsCommand;
 import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
 
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 //import edu.wpi.cscore.CvSink;
 //import edu.wpi.cscore.CvSource;
 //import edu.wpi.cscore.UsbCamera;
@@ -26,6 +30,7 @@ import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -49,6 +54,20 @@ public class Robot extends IterativeRobot {
 	public static final BaseVision visionProcessing = new BaseVision();
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
+	
+	private SendableChooser autoChooser = new SendableChooser();
+	
+	Accelerometer accel = new BuiltInAccelerometer();
+	
+	double accelX;
+	double accelY;
+	double accelZ;
+	
+	public enum AutoModes {
+		AutoGear,
+		AutoHighGoal,
+		AutoLowGoal
+		}
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -62,11 +81,21 @@ public class Robot extends IterativeRobot {
 		System.out.println("Entering roboInit");
 		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
-		//chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
+		chooser.addDefault("Default Auto", new DriveWithJoystickCommand());
+		autoChooser.addDefault("AutoGear", AutoModes.AutoGear);
+		autoChooser.addObject("AutoHighGoal", AutoModes.AutoHighGoal);
+		autoChooser.addObject("AutoLowGoal", AutoModes.AutoLowGoal);
 		 //chooser.addObject("My Auto", new MyAutoCommand());
-		//SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Auto mode", chooser);
+		SmartDashboard.putData("Mecanum Drive", mecanumDriveSubsystem);
 		SmartDashboard.putData(Robot.ropeClimberSubsystem);
-		SmartDashboard.putData("Gyro", mecanumDriveSubsystem.gyro);
+		//SmartDashboard.putData("Gyro", mecanumDriveSubsystem.gyro);
+		//TODO test with actual robot
+//		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
+//		mecanumDriveSubsystem.gyro.startLiveWindowMode();
+//		SmartDashboard.putNumber("Accelerometer X-Value", accelX);
+//		SmartDashboard.putNumber("Accelerometer Y-Value", accelY);
+//		SmartDashboard.putNumber("Accelerometer Z-Value", accelZ);
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -96,8 +125,17 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		//autonomousCommand = chooser.getSelected();
+		autonomousCommand = chooser.getSelected();
 
+		AutoModes autoSelected = (AutoModes)autoChooser.getSelected();
+		        switch(autoSelected)  {
+		        case AutoHighGoal:
+		        autonomousCommand = new ShootBallsCommand();
+		        break;
+		        case AutoLowGoal:
+		        autonomousCommand = new DumpLowGoalCommand();
+		        break;
+		        }
 		/*
 		 * String autoSelected = SmartDashboard.getString("Auto Selector",
 		 * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand
@@ -134,6 +172,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
+		mecanumDriveSubsystem.gyro.startLiveWindowMode();
+		accelX = accel.getX();
+		accelY = accel.getY();
+		accelZ = accel.getZ();
+		SmartDashboard.putNumber("Accelerometer X-Value", accelX);
+		SmartDashboard.putNumber("Accelerometer Y-Value", accelY);
+		SmartDashboard.putNumber("Accelerometer Z-Value", accelZ);
 	}
 
 	/**

@@ -24,8 +24,9 @@ public class DriverOI extends OI{
 		
 		//checks to see if buttons are pressed
 		leftTrigger.whenPressed(new PickUpCommand());
-		leftBumper.whenPressed(new StopPickupCommand());
-		back.whenPressed(new ReversePickupCommand());
+		leftTrigger.whenReleased(new StopPickupCommand());
+		leftBumper.whenPressed(new ReversePickupCommand());
+		leftBumper.whenReleased(new StopPickupCommand());
 	}
 
 }
