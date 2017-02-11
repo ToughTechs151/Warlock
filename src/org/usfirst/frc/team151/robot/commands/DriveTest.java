@@ -12,11 +12,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *@author Julia Zhang
  * For testing the PID Controllers
  */
-public class SetDistanceTarget extends Command {
+public class DriveTest extends Command {
 	
 	private PIDController pid = null;
 
-    public SetDistanceTarget(double distance) {
+    public DriveTest(double distance) {
     	requires(Robot.mecanumDriveSubsystem);
     	pid = new PIDController(0.1, 0.01, 0.0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
