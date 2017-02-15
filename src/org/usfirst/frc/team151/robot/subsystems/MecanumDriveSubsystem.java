@@ -23,7 +23,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 	private SpeedController leftFrontSpeedController = null;
 	private SpeedController rightFrontSpeedController = null;
 	private SpeedController rightRearSpeedController = null;
-	private SpeedController leftReartSpeedController = null;
+	private SpeedController leftRearSpeedController = null;
 	private RobotDrive robotDrive = null;
 	
 	private Encoder leftFrontEncoder = null;
@@ -44,7 +44,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 		leftFrontSpeedController = new Talon(RobotMap.leftFrontMotor);        
 		rightFrontSpeedController = new Talon(RobotMap.rightFrontMotor);
 		rightRearSpeedController = new Talon(RobotMap.rightRearMotor);
-		leftReartSpeedController = new Talon(RobotMap.leftRearMotor);
+		leftRearSpeedController = new Talon(RobotMap.leftRearMotor);
 		
 		leftFrontEncoder = new Encoder(0, 1); //check values
 		rightFrontEncoder = new Encoder(2, 3);
@@ -60,7 +60,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 		gyro.calibrate();
 		gyro.reset();
 		
-		robotDrive = new RobotDrive(leftFrontSpeedController, leftReartSpeedController, rightFrontSpeedController,
+		robotDrive = new RobotDrive(leftFrontSpeedController, leftRearSpeedController, rightFrontSpeedController,
 				rightRearSpeedController);
 		robotDrive.setInvertedMotor(MotorType.kFrontRight, true);
 		robotDrive.setInvertedMotor(MotorType.kRearRight, true);

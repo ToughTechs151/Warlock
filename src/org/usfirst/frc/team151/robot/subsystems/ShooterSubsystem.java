@@ -19,7 +19,7 @@ public class ShooterSubsystem extends Subsystem {
 	private static int channel2 = 1;
 	
 	//pulses 1440 pulses per rev
-	private double distancePerPulse = 0.01963194; //TODO need to change this, in inches
+	private double distancePerPulse = 6 * Math.PI / 1440; //TODO need to change this, in inches
 	
 	public ShooterSubsystem() {
 		wheelSpinner = new Talon(RobotMap.shooterMotor);
@@ -49,5 +49,18 @@ public class ShooterSubsystem extends Subsystem {
     
     public void shootBalls() {
     	wheelSpinner.set(1.0); //TODO change speed (do math), use algorithm to set speed
+    }
+    
+    public void shootBalls(double speed) {
+    	wheelSpinner.set(speed);
+    }
+    
+    public double getDistanceGoal() {
+    	return 120; //TODO change this according to visual information
+    }
+    
+    public void reset() {
+ //   	wheelSpinner.set(0);
+    	wheelEncoder.reset();
     }
 }
