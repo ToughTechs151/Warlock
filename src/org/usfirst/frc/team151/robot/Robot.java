@@ -43,8 +43,8 @@ public class Robot extends IterativeRobot {
 	public static final GearSubsystem gearSubsystem = new GearSubsystem();
 	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
-//	public static final GearVision gearVision = new GearVision(0);
-//	public static final ShooterVision shooterVision = new ShooterVision(1);
+	public static final GearVision gearVision = new GearVision(0);
+	public static final BoilerVision shooterVision = new BoilerVision(1);
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
 	
