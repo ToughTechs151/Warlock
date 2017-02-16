@@ -43,8 +43,10 @@ public class Robot extends IterativeRobot {
 	public static final GearSubsystem gearSubsystem = new GearSubsystem();
 	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
-	public static final GearVision gearVision = new GearVision(0);
-	public static final BoilerVision boilerVision = new BoilerVision(1);
+	
+	//Initialize cameras in roboInit()!!!!!!
+	public static GearVision gearVision = null;
+	public static BoilerVision boilerVision = null;
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
 	
@@ -65,6 +67,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("Entering roboInit");
+		
+		boilerVision = new BoilerVision(0);
+		gearVision = new GearVision(1);
+		
 		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
 		autoChooser.addDefault("AutoGear", AutoModes.AutoGear);
