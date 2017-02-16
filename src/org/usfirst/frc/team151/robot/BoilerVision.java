@@ -5,14 +5,14 @@ import org.opencv.core.Mat;
 public class BoilerVision extends BaseVision {
 
 	/**
-	 * In inches
+	 * The actual, real-world height of the boiler in inches
 	 */
 	private static final double HEIGHT_OF_OBJECT = 10.0;
+	/**
+	 * The focal length of the camera
+	 */
 	private static final double FOCAL_LENGTH = 707.567;
 //	private static final double FOCAL_LENGTH = 788.6;
-	/**
-	 * The width of the current bounding rectangle in pixels.
-	 */
 	
 	public BoilerVision(int channel) {
 		super(channel);
@@ -20,15 +20,20 @@ public class BoilerVision extends BaseVision {
 	}
 	
 	@Override
-	public void startVision (Mat source) {
-		super.startVision(source);
+	public void startVision() {
+		super.startVision();
 	}
 	
+	@Override
+	public void stopVision() {
+		super.stopVision();
+	}
 	
 	public double getDistance() {
 		return super.getDistance(HEIGHT_OF_OBJECT, FOCAL_LENGTH, this);
 	}
 	
+	@Override
 	public double getDistanceFromCenter() {
 		return super.getDistanceFromCenter();
 	}

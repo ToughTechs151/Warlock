@@ -2,6 +2,7 @@ package org.usfirst.frc.team151.robot;
 
 import org.usfirst.frc.team151.robot.commands.PickUpCommand;
 import org.usfirst.frc.team151.robot.commands.ReversePickupCommand;
+import org.usfirst.frc.team151.robot.commands.StartBoilerVisionCommand;
 import org.usfirst.frc.team151.robot.commands.StopPickupCommand;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -27,6 +28,8 @@ public class DriverOI extends OI{
 		leftTrigger.whenReleased(new StopPickupCommand());
 		leftBumper.whenPressed(new ReversePickupCommand());
 		leftBumper.whenReleased(new StopPickupCommand());
+		
+		back.whenPressed(new StartBoilerVisionCommand());
 	}
 
 }

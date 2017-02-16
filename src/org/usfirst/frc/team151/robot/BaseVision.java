@@ -1,6 +1,7 @@
 package org.usfirst.frc.team151.robot;
 
 import edu.wpi.cscore.CvSink;
+import edu.wpi.cscore.CvSource;
 import edu.wpi.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.CameraServer;
 
@@ -16,6 +17,7 @@ public class BaseVision {
 	protected double currentRectHeightPix;
 
 	UsbCamera usbCamera = null;
+	Thread visionThread;
 
 	//Outputs
 	private Mat source = new Mat();
@@ -39,11 +41,47 @@ public class BaseVision {
 	public CvSink getVideoFrame() {
 		return CameraServer.getInstance().getVideo();
 	}
+
 	/*
 	 * A method like this called startVision will be in each class and start the vision 
    for each separate class, and should be distinct for each class
 	 */
-	public void startVision(Mat source0) {
+	public void startVision() {
+		visionThread = new Thread(() -> {
+			CvSink frame = getVideoFrame();
+			// Setup a CvSource. This will send images back to the Dashboard
+			CvSource outputStream = CameraServer.getInstance().putVideo("Vision Processing", 640, 480);
+
+			// Mats are very memory expensive. Lets reuse this Mat.
+			Mat mat = new Mat();
+
+			// This cannot be 'true'. The program will never exit if it is. This
+			// lets the robot stop this thread when restarting robot code or
+			// deploying.
+			while (!Thread.interrupted()) {
+				// Tell the CvSink to grab a frame from the camera and put it
+				// in the source mat.  If there is an error notify the output.
+				if (frame.grabFrame(mat) == 0) {
+					// Send the output the error.
+					outputStream.notifyError(frame.getError());
+					// skip the rest of the current iteration
+					continue;
+				}
+				// Process the image
+				mat = process(mat);
+				// Give the output stream a new image to display
+				outputStream.putFrame(mat);
+			}
+		});
+		visionThread.setDaemon(true);
+		visionThread.start();
+	}
+	
+	public void stopVision() {
+		visionThread.interrupt();
+	}
+
+	private Mat process(Mat source0) {
 		//TODO INSERT CODE FOR EACH SEPARATE VISION CLASS
 		this.source = source0;
 		// Step HSV_Threshold0:
@@ -82,13 +120,13 @@ public class BaseVision {
 		// Step Bounding_Rectangle:
 		Mat boundingRectInput = source0;
 		ArrayList<MatOfPoint> boundingRectInput2 = filterContoursOutput;
-		boundingRect(boundingRectInput, filterContoursOutput);
+		boundingRect(boundingRectInput, boundingRectInput2);
 
 		//Step center circle:
 		Mat drawCenterOfRectInput = source0;
 		drawCenterOfRect(drawCenterOfRectInput);
 
-		//			return source0;
+		return source0;
 	}
 
 	/**

@@ -5,10 +5,13 @@ import org.opencv.core.Mat;
 public class GearVision extends BaseVision {
 
 	/**
-	 * In inches
+	 * The actual, real-world width of the gear tape in inches
 	 */
 	//TODO fix this value
-	private static final double HEIGHT_OF_OBJECT = 10.0;
+	private static final double WIDTH_OF_OBJECT = 10.0;
+	/**
+	 * The focal length of the camera
+	 */
 	private static final double FOCAL_LENGTH = 707.567;
 //	private static final double FOCAL_LENGTH = 788.6;
 	
@@ -18,14 +21,20 @@ public class GearVision extends BaseVision {
 	}
 	
 	@Override
-	public void startVision(Mat source) {
-		super.startVision(source);
+	public void startVision() {
+		super.startVision();
+	}
+	
+	@Override
+	public void stopVision() {
+		super.stopVision();
 	}
 	
 	public double getDistance() {
-		return super.getDistance(HEIGHT_OF_OBJECT, FOCAL_LENGTH, this);
+		return super.getDistance(WIDTH_OF_OBJECT, FOCAL_LENGTH, this);
 	}
 	
+	@Override
 	public double getDistanceFromCenter() {
 		return super.getDistanceFromCenter();
 	}
