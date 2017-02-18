@@ -29,12 +29,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	
+
 	public enum AutoModes {
 		AutoGear,
 		AutoHighGoal,
 		AutoLowGoal
-		}
+	}
 
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
 	public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
@@ -43,17 +43,17 @@ public class Robot extends IterativeRobot {
 	public static final GearSubsystem gearSubsystem = new GearSubsystem();
 	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
-	
-	//Initialize cameras in roboInit()!!!!!!
+
+	//Initialize cameras and joysticks in roboInit()!!!!!!
 	public static GearVision gearVision = null;
 	public static BoilerVision boilerVision = null;
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
-	
+
 	private SendableChooser <AutoModes> autoChooser = new SendableChooser<AutoModes>();
-	
+
 	Accelerometer accel = new BuiltInAccelerometer();
-	
+
 	double accelX;
 	double accelY;
 	double accelZ;
@@ -67,23 +67,23 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		System.out.println("Entering roboInit");
-		
+
 		boilerVision = new BoilerVision(0);
 		gearVision = new GearVision(1);
-		
+
 		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
 		autoChooser.addDefault("AutoGear", AutoModes.AutoGear);
 		autoChooser.addObject("AutoHighGoal", AutoModes.AutoHighGoal);
 		autoChooser.addObject("AutoLowGoal", AutoModes.AutoLowGoal);
-		 //chooser.addObject("My Auto", new MyAutoCommand());
+		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", autoChooser);
 		SmartDashboard.putData("Mecanum Drive", mecanumDriveSubsystem);
 		SmartDashboard.putData(Robot.ropeClimberSubsystem);
 		//SmartDashboard.putData("Gyro", mecanumDriveSubsystem.gyro);
 		//TODO test with actual robot
-//		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
-//		mecanumDriveSubsystem.gyro.startLiveWindowMode();
+		//		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
+		//		mecanumDriveSubsystem.gyro.startLiveWindowMode();
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -114,14 +114,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		AutoModes autoSelected = (AutoModes)autoChooser.getSelected();
-			switch(autoSelected)  {
-		    case AutoHighGoal:
-		    autonomousCommand = new ShootBallsCommand();
-		    break;
-		    case AutoLowGoal:
-		    autonomousCommand = new DumpLowGoalCommand();
-		    break;
-		        }
+		switch(autoSelected)  {
+		case AutoHighGoal:
+			autonomousCommand = new ShootBallsCommand();
+			break;
+		case AutoLowGoal:
+			autonomousCommand = new DumpLowGoalCommand();
+			break;
+		}
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)

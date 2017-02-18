@@ -18,6 +18,8 @@ public class ShooterSubsystem extends Subsystem {
 	private static int channel1 = 0;
 	private static int channel2 = 1;
 	
+	private boolean isStopped = false;
+	
 	//pulses 1440 pulses per rev
 	private double distancePerPulse = 6 * Math.PI / 1440; //TODO need to change this, in inches
 	
@@ -45,6 +47,7 @@ public class ShooterSubsystem extends Subsystem {
     
     public void stopShootBalls() {
     	wheelSpinner.set(0.0);
+    	isStopped = true;
     }
     
     public void shootBalls() {
@@ -62,5 +65,9 @@ public class ShooterSubsystem extends Subsystem {
     public void reset() {
  //   	wheelSpinner.set(0);
     	wheelEncoder.reset();
+    }
+    
+    public boolean isStopped() {
+    	return isStopped;
     }
 }

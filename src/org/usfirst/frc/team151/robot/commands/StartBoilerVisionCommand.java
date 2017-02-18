@@ -22,18 +22,7 @@ public class StartBoilerVisionCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double distFromCenter = Robot.boilerVision.getDistanceFromCenter();
-    	if(distFromCenter < 0) {
-    		//TODO fix z-axis rotation power
-    		Robot.mecanumDriveSubsystem.drive(0, 0, 0.1);
-    		System.out.println("StartBoilerVisionCommand execute - turning right");
-    	} else if(distFromCenter > 0) {
-    		Robot.mecanumDriveSubsystem.drive(0, 0, -0.1);
-    		System.out.println("StartBoilerVisionCommand execute - turning left");
-    	} else {
-    		Robot.mecanumDriveSubsystem.drive(0, 0, 0);
-    		System.out.println("StartBoilerVisionCommand execute - not turning");
-    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()

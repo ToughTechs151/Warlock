@@ -42,7 +42,7 @@ public class DriveStraightCommand extends Command {
 				Robot.mecanumDriveSubsystem.drive(Robot.primaryDriverOi);
 			}
 		});
-    	distance = distanceToTravel;
+    	
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -50,15 +50,16 @@ public class DriveStraightCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	driverPid.reset();
-    	driverPid.enable();
-    	driverPid.setSetpoint(distance);
-    	driverPid.setAbsoluteTolerance(0.01);
+		driverPid.enable();
+		driverPid.setSetpoint(distance);
+		driverPid.setAbsoluteTolerance(0.01);
+		distance = Robot.gearVision.getDistance();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (driverPid.getError() > 0.01) {
-    		Robot.mecanumDriveSubsystem.drive(0.25, 0, 0);
+    	if(driverPid.getError() > 0.01) {
+    		Robot.mecanumDriveSubsystem.drive(0, 0.25, 0);
     	}
 //    	else {
 //    		Robot.mecanumDriveSubsystem.drive(0, 0, 0);
@@ -67,13 +68,13 @@ public class DriveStraightCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return driverPid.onTarget();
+    	return driverPid.onTarget();
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	driverPid.disable();
-    	Robot.mecanumDriveSubsystem.drive(0, 0, 0);
+    	Robot.mecanumDriveSubsystem.drive(0, 0, 0);    	
     }
 
     // Called when another command which requires one or more of the same

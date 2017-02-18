@@ -9,6 +9,6 @@ public class AutonomousGearCenter extends CommandGroup {
 
     public AutonomousGearCenter() {
     	addSequential(new DriveStraightCommand(4));
- //   	addSequential(new StartVisionCommand());
+    	addSequential(new GearVisionDriveCommand());
     }
 }
