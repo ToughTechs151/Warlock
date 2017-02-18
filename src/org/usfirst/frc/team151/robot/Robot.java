@@ -31,9 +31,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	
 	public enum AutoModes {
-		AutoGear,
+		AutoGearCenter,
+		AutoGearLeft,
+		AutoGearRight,
 		AutoHighGoal,
-		AutoLowGoal
+		AutoLowGoal,
+		AutoShooter
 		}
 
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
@@ -73,9 +76,13 @@ public class Robot extends IterativeRobot {
 		
 		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
-		autoChooser.addDefault("AutoGear", AutoModes.AutoGear);
+		autoChooser.addDefault("AutoGear", AutoModes.AutoGearCenter);
+		autoChooser.addDefault("AutoGear", AutoModes.AutoGearLeft);
+		autoChooser.addDefault("AutoGear", AutoModes.AutoGearRight);
 		autoChooser.addObject("AutoHighGoal", AutoModes.AutoHighGoal);
 		autoChooser.addObject("AutoLowGoal", AutoModes.AutoLowGoal);
+		autoChooser.addObject("AutoLowGoal", AutoModes.AutoShooter);
+		
 		 //chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", autoChooser);
 		SmartDashboard.putData("Mecanum Drive", mecanumDriveSubsystem);
