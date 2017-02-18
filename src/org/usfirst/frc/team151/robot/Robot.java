@@ -77,11 +77,11 @@ public class Robot extends IterativeRobot {
 		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
 		autoChooser.addDefault("AutoGear", AutoModes.AutoGearCenter);
-		autoChooser.addDefault("AutoGear", AutoModes.AutoGearLeft);
-		autoChooser.addDefault("AutoGear", AutoModes.AutoGearRight);
+		autoChooser.addDefault("AutoGearLeft", AutoModes.AutoGearLeft);
+		autoChooser.addDefault("AutoGearRight", AutoModes.AutoGearRight);
 		autoChooser.addObject("AutoHighGoal", AutoModes.AutoHighGoal);
 		autoChooser.addObject("AutoLowGoal", AutoModes.AutoLowGoal);
-		autoChooser.addObject("AutoLowGoal", AutoModes.AutoShooter);
+		autoChooser.addObject("AutoShooter", AutoModes.AutoShooter);
 		
 		 //chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", autoChooser);
