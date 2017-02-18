@@ -122,6 +122,20 @@ public class MecanumDriveSubsystem extends Subsystem {
 	public double getDistanceRemaining() {
 		return (totalDistance - getDistanceTraveled());
 	}
+	public int getCountEncoders() {  //The current count
+		return ((leftFrontEncoder.get() + rightFrontEncoder.get() + leftRearEncoder.get() +  rightRearEncoder.get())/4);
+	}
+	public double getRawDistanceTraveled() { //The count without compensation for decoding scale factor.
+		return ((leftFrontEncoder.getRaw() + rightFrontEncoder.getRaw() + leftRearEncoder.get() + rightRearEncoder.get())/4);
+	}
+	@SuppressWarnings("deprecation")
+	public double getTimeTraveled () { //The current period of the counter in seconds
+		return ((leftFrontEncoder.getPeriod() + rightFrontEncoder.getPeriod() + leftRearEncoder.getPeriod() + rightRearEncoder.getPeriod())/4);
+	}
+	public double getRateOfEncoders() { // The current rate of the counter in units/sec
+		return ((leftFrontEncoder.getRate() + rightFrontEncoder.getRate() + leftRearEncoder.getRate() + rightRearEncoder.getRate())/4);
+	}
+	
 	
 	public void reset() {
 		leftRearEncoder.reset();
