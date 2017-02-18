@@ -16,8 +16,8 @@ public class BaseVision {
 	protected double currentRectWidthPix;
 	protected double currentRectHeightPix;
 
-	UsbCamera usbCamera = null;
-	Thread visionThread;
+	protected UsbCamera usbCamera = null;
+	protected Thread visionThread;
 
 	//Outputs
 	private Mat source = new Mat();

@@ -4,9 +4,11 @@ import org.usfirst.frc.team151.robot.commands.ClimbRopeCommand;
 import org.usfirst.frc.team151.robot.commands.ReverseAgitatorCommand;
 import org.usfirst.frc.team151.robot.commands.ShootBallsCommand;
 import org.usfirst.frc.team151.robot.commands.StartAgitatorCommand;
+import org.usfirst.frc.team151.robot.commands.StartShooterCommandGroup;
 import org.usfirst.frc.team151.robot.commands.StopAgitatorCommand;
 import org.usfirst.frc.team151.robot.commands.StopRopeCommand;
 import org.usfirst.frc.team151.robot.commands.StopShootBallsCommand;
+import org.usfirst.frc.team151.robot.commands.StopShooterCommandGroup;
 
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
@@ -27,8 +29,8 @@ public class CoDriverOI extends OI{
 		leftTrigger = new JoystickButton(joystick, 7);
 		
 		y.whenPressed(new ClimbRopeCommand());
-		rightTrigger.whenPressed(new ShootBallsCommand());
-		rightBumper.whenPressed(new StopShootBallsCommand());
+		rightTrigger.whenPressed(new StartShooterCommandGroup());
+		rightBumper.whenPressed(new StopShooterCommandGroup());
 		leftTrigger.whenPressed(new StartAgitatorCommand());
 		leftTrigger.whenReleased(new StopAgitatorCommand());
 		leftBumper.whenPressed(new ReverseAgitatorCommand());
