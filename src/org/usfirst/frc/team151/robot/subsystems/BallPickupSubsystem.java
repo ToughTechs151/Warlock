@@ -17,8 +17,9 @@ public class BallPickupSubsystem extends Subsystem {
 	private SpeedController spinBallPickup = null;
 	
 	public BallPickupSubsystem() {
+		System.out.println("Starting BallPickupSubsystem");
 		spinBallPickup = new Talon(RobotMap.spinBallPickup);
-		
+		System.out.println("Ending BallPickupSubsystem");
 	}
 	
     public void initDefaultCommand() {
@@ -27,7 +28,7 @@ public class BallPickupSubsystem extends Subsystem {
     }
     
     public void pickupBalls() {
-    	spinBallPickup.set(-1.0);
+    	spinBallPickup.set(-0.75);
     }
     
     public void stopPickupBalls() {
@@ -35,6 +36,6 @@ public class BallPickupSubsystem extends Subsystem {
     }
     
     public void reversePickupBalls() {
-    	spinBallPickup.set(1.0);
+    	spinBallPickup.set(0.75);
     }
 }

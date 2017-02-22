@@ -10,8 +10,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousGearRight extends CommandGroup {
 
     public AutonomousGearRight() {
-       addSequential(new DriveStraightCommand(4));
+       addSequential(new DriveStraightCommand(24));
        addSequential(new TurnCommand(240));
-       addSequential(new GearVisionDriveCommand());
+//       addSequential(new GearVisionDriveCommand());
     }
 }

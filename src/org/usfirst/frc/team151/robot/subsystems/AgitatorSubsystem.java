@@ -15,9 +15,12 @@ public class AgitatorSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+	public AgitatorSubsystem() {
+		System.out.println("Agitator");
+		agitator = new Relay(RobotMap.shooterAgitator);
+	}
 
     public void initDefaultCommand() {
-    	agitator = new Relay(RobotMap.shooterAgitator);
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }

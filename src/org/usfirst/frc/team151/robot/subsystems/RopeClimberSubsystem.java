@@ -24,9 +24,11 @@ public class RopeClimberSubsystem extends Subsystem {
     // here. Call these from Commands.
 
 	public RopeClimberSubsystem() {
+		System.out.println("RopeClimber start initializing");
 		diOutRopeClimber = new Relay(RobotMap.digOutRopeClimber);
 		diOutRopeClimber.set(Value.kOff);
 		ropeLimitSwitch = new DigitalInput(RobotMap.ropeLimitSwitch);
+		System.out.println("RopeClimber initialized");
 	} 
 	
     public void initDefaultCommand() {

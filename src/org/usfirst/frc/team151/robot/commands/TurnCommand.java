@@ -30,7 +30,7 @@ public class TurnCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.mecanumDriveSubsystem.drive(0, 0, 0.25);
-    	if (Robot.mecanumDriveSubsystem.gyro.getAngle() == turnAngle) {
+    	if (Robot.mecanumDriveSubsystem.gyro.getAngle() >= turnAngle) {
     		stopTurn = true;
     	}
     }

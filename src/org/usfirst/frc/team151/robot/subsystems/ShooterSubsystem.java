@@ -37,19 +37,23 @@ public class ShooterSubsystem extends Subsystem {
 	private static final double V180 = 358.3;
 	
 	//pulses 1440 pulses per rev
-	private double distancePerPulse = 6 * Math.PI / 1440; //TODO need to change this, in inches
+	private static final double DISTANCE_PER_PULSE = 6 * Math.PI / 1440; //TODO need to change this, in inches
 	
 	private static final double MOTOR_MAX_RPM = 5000; //TODO change this(?)
+	
+	private static final double WHEEL_CIRCUMFERENCE = Math.PI * 6; //TODO check wheel diameter
 	
 	private double[] velocityCalc = {
 		V72, V84, V96, V108, V120, V132, V144, V156, V168, V180	
 	};
 	
 	public ShooterSubsystem() {
+		System.out.println("Starting ShooterSubsystem constructor");
 		wheelSpinner = new Talon(RobotMap.shooterMotor);
 		wheelEncoder = new Encoder(channel1, channel2);
 		wheelEncoder.reset();
-		wheelEncoder.setDistancePerPulse(distancePerPulse);
+		wheelEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+		System.out.println("Shooter initialized");
 	}
 
 
@@ -64,7 +68,8 @@ public class ShooterSubsystem extends Subsystem {
     }
 	
     public double getEncoderSpeed() {
-    	return wheelEncoder.getRate();
+//    	return wheelEncoder.getRate();
+    	return 0;
     }
     
     public void stopShootBalls() {
@@ -80,7 +85,11 @@ public class ShooterSubsystem extends Subsystem {
     	wheelSpinner.set(speed);
     }
     
-    public double getWheelRpm() {
+    public double getCurrentWheelRpm() {
+    	return wheelEncoder.getRate() * 60 * (1/WHEEL_CIRCUMFERENCE);
+    }
+    
+    public double getIdealWheelRpm() {
     	double range = Math.sqrt(Math.pow(Robot.boilerVision.getDistance(), 2) * Math.pow(BOILER_HEIGHT,  2));
     	return getInitialVelocity(range) * 60 * 4 / CIRCUMFERENCE / MOTOR_MAX_RPM;
     }
@@ -95,12 +104,8 @@ public class ShooterSubsystem extends Subsystem {
     	}
     }
     
-    public double getDistanceGoal() {
-    	return 120; //TODO change this according to visual information
-    }
-    
     public void reset() {
- //   	wheelSpinner.set(0);
+    	wheelSpinner.set(0);
     	wheelEncoder.reset();
     }
     

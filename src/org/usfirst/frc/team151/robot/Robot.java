@@ -3,13 +3,14 @@ package org.usfirst.frc.team151.robot;
 
 import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.GearSubsystem;
-import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
+//import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team151.robot.commands.AutonomousGearCenter;
 import org.usfirst.frc.team151.robot.commands.AutonomousGearLeft;
 import org.usfirst.frc.team151.robot.commands.AutonomousGearRight;
+import org.usfirst.frc.team151.robot.commands.DriveStraightCommand;
 import org.usfirst.frc.team151.robot.commands.StartShooterCommandGroup;
 import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
 
@@ -41,8 +42,8 @@ public class Robot extends IterativeRobot {
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
 	public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 	public static final RopeClimberSubsystem ropeClimberSubsystem = new RopeClimberSubsystem();
-	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
-	public static final GearSubsystem gearSubsystem = new GearSubsystem();
+//	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
+//	public static final GearSubsystem gearSubsystem = new GearSubsystem();
 	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
 
@@ -83,11 +84,12 @@ public class Robot extends IterativeRobot {
 		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Autonomous mode", autoChooser);
 		SmartDashboard.putData("Mecanum Drive", mecanumDriveSubsystem);
-		SmartDashboard.putData(Robot.ropeClimberSubsystem);
+//		SmartDashboard.putData(Robot.ropeClimberSubsystem);
 		//SmartDashboard.putData("Gyro", mecanumDriveSubsystem.gyro);
 		//TODO test with actual robot
 		//		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
 		//		mecanumDriveSubsystem.gyro.startLiveWindowMode();
+		System.out.println("roboInit finished");
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -126,13 +128,14 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutonomousGearCenter();
 			break;
 		case AutoGearRight:
-			autonomousCommand = new AutonomousGearRight();
+			autonomousCommand = new DriveStraightCommand(6);
 			break;
 		case AutoShooter:
 			autonomousCommand = new StartShooterCommandGroup();
 		}
 
 		// schedule the autonomous command (example)
+		System.out.println("autonomousCommand is " + autonomousCommand);
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}

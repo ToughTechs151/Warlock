@@ -7,5 +7,6 @@ public class StartShooterCommandGroup extends CommandGroup {
 	public StartShooterCommandGroup() {
 		addParallel(new StartBoilerVisionCommand());
 		addParallel(new ShootBallsCommand());
+		addParallel(new StartAgitatorCommand());
 	}
 }
