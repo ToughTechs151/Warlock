@@ -2,17 +2,15 @@
 package org.usfirst.frc.team151.robot;
 
 import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
-import org.usfirst.frc.team151.robot.subsystems.GearSubsystem;
-//import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
-//import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team151.robot.commands.AutonomousGearCenter;
 import org.usfirst.frc.team151.robot.commands.AutonomousGearLeft;
 import org.usfirst.frc.team151.robot.commands.AutonomousGearRight;
 import org.usfirst.frc.team151.robot.commands.DriveStraightCommand;
 import org.usfirst.frc.team151.robot.commands.StartShooterCommandGroup;
-import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
+//import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
+//TODO UNCOMMENT AGITATOR SUBSYSTEM LATER
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -41,10 +39,7 @@ public class Robot extends IterativeRobot {
 
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
 	public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-//	public static final RopeClimberSubsystem ropeClimberSubsystem = new RopeClimberSubsystem();
-//	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
-//	public static final GearSubsystem gearSubsystem = new GearSubsystem();
-	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
+//	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
 
 	//Initialize cameras in roboInit()!!!!!!
@@ -69,6 +64,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		//TODO NOTE: WHOLE AGITATOR SUBSYSTEM IS CURRENTLY COMMENTED OUT
 		System.out.println("Entering roboInit");
 
 		boilerVision = new BoilerVision(0);
@@ -128,7 +124,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutonomousGearCenter();
 			break;
 		case AutoGearRight:
-			autonomousCommand = new DriveStraightCommand(6);
+			autonomousCommand = new DriveStraightCommand(Math.PI * 6 * 2 / 360);
 			break;
 		case AutoShooter:
 			autonomousCommand = new StartShooterCommandGroup();

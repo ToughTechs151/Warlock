@@ -26,9 +26,9 @@ public class MecanumDriveSubsystem extends Subsystem {
 	private SpeedController leftRearSpeedController = null;
 	private RobotDrive robotDrive = null;
 	
-	private Encoder leftFrontEncoder = null; //TODO
+//	private Encoder leftFrontEncoder = null; //TODO
 	public Encoder rightFrontEncoder = null; //TODO
-	private Encoder rightRearEncoder = null;
+//	private Encoder rightRearEncoder = null;
 	public Encoder leftRearEncoder = null;
 	
 	public static ADXRS450_Gyro gyro = null;
@@ -37,7 +37,6 @@ public class MecanumDriveSubsystem extends Subsystem {
 	public static final double creepMultiplier = 0.25;
 	public static final double turboMultiplier = 1.0;
 	
-	public static final double totalDistance = 72.0;
 	/*
 	 * TRY CALCULATING DISTANCEPERPULSE WITHOUT ANY MATH OPERATIONS
 	 * PUT IN THE VALUE THAT RESULTS :
@@ -45,7 +44,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 */
 //	public static final double distancePerPulse = 0.0130899694;
 //	public static final double distancePerPulse = 0.0065449847;
-	public static final double DISTANCE_PER_PULSE = 0.0523598776;
+	public static final double DISTANCE_PER_PULSE = Math.PI * 6 * 2 / 360;
 
 	public MecanumDriveSubsystem() {
 		System.out.println("Entering MecanumDriveSubsystem constructor");
@@ -55,21 +54,15 @@ public class MecanumDriveSubsystem extends Subsystem {
 		leftRearSpeedController = new Talon(RobotMap.leftRearMotor);
 		
 		
-//		leftFrontEncoder = new Encoder(0, 1); //check values
 		rightFrontEncoder = new Encoder(RobotMap.rightFrontB, RobotMap.rightFrontA, false, Encoder.EncodingType.k4X);
-//		rightRearEncoder = new Encoder(4, 5);
 		leftRearEncoder = new Encoder(RobotMap.leftRearB, RobotMap.leftRearA, false, Encoder.EncodingType.k4X);
 		
-//		leftFrontEncoder.setDistancePerPulse(distancePerPulse);
 		rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-//		rightRearEncoder.setDistancePerPulse(distancePerPulse);
 		leftRearEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 		
 		leftRearEncoder.setReverseDirection(true);
 		
-//		leftFrontEncoder.reset();
 		rightFrontEncoder.reset();
-//		rightRearEncoder.reset();
 		leftRearEncoder.reset();
 		
 		gyro = new ADXRS450_Gyro();
@@ -96,14 +89,14 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 */
 	public void drive(double x, double y, double rotation) {
 		System.out.println("in x y rotation drive method");
-		robotDrive.mecanumDrive_Cartesian(x, -y, rotation, gyro.getAngle());
-//		System.out.println("leftRear encoder rate: " + leftRearEncoder.getRate() + 
-//				"\t\tleftRear encoder distance: " + leftRearEncoder.getDistance());
-		System.out.println("rightFront encoder rate: " + rightFrontEncoder.getRate() + 
-				"\t\trightFront encoder distance: " + rightFrontEncoder.getDistance());
-		System.out.println("rightFrontEncoder distance: " + rightFrontEncoder.get());
-//		System.out.println("leftRear encoder direction: " + leftRearEncoder.getDirection() +
-//				"\t\trightFront encoder direction: " + rightFrontEncoder.getDirection());
+		robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle());
+		System.out.println("leftRear encoder rate: " + leftRearEncoder.getRate() + 
+				"\t\tleftRear encoder distance: " + leftRearEncoder.getDistance());
+//		System.out.println("rightFront encoder rate: " + rightFrontEncoder.getRate() + 
+//				"\t\trightFront encoder distance: " + rightFrontEncoder.getDistance());
+//		System.out.println("leftRear encoder pulses: " + leftRearEncoder.get() + 
+//				"\t\trightFront encoder pulses: " + rightFrontEncoder.get());
+		System.out.println("leftRear encoder pulses: " + leftRearEncoder.get());
 	}
 	
 	/**
@@ -141,38 +134,16 @@ public class MecanumDriveSubsystem extends Subsystem {
 	}
 	
 	public double getDistanceTraveled() {
-//		return (leftFrontEncoder.getDistance() + rightFrontEncoder.getDistance() + 
-//				leftRearEncoder.getDistance() + rightRearEncoder.getDistance())/4;
-	//	return leftRearEncoder.getDistance(); //TODO maybe uncomment
-		return rightFrontEncoder.getDistance();
+		return (leftRearEncoder.getDistance());
 	}
 	
-	public double getDistanceRemaining() {
-		return (totalDistance - getDistanceTraveled());
-	}
-	
-	public int getCountEncoders() {  //The current count
-		return ((leftFrontEncoder.get() + rightFrontEncoder.get() + leftRearEncoder.get() +  rightRearEncoder.get())/4);
-	}
-	
-	public double getRawDistanceTraveled() { //The count without compensation for decoding scale factor.
-		return ((leftFrontEncoder.getRaw() + rightFrontEncoder.getRaw() + leftRearEncoder.get() + rightRearEncoder.get())/4);
-	}
-	
-//	@SuppressWarnings("deprecation")
-//	public double getTimeTraveled () { //The current period of the counter in seconds
-//		return ((leftFrontEncoder.getPeriod() + rightFrontEncoder.getPeriod() + leftRearEncoder.getPeriod() + rightRearEncoder.getPeriod())/4);
+//	public double getDistanceRemaining() {
+//		return (totalDistance - getDistanceTraveled());
 //	}
-//	
-	public double getRateOfEncoders() { // The current rate of the counter in units/sec
-		return ((leftFrontEncoder.getRate() + rightFrontEncoder.getRate() + leftRearEncoder.getRate() + rightRearEncoder.getRate())/4);
-	}
 	
 	public void resetAll() {
 		leftRearEncoder.reset();
-		rightRearEncoder.reset();
 		rightFrontEncoder.reset();
-		leftRearEncoder.reset();
 		gyro.reset();
 	}
 }

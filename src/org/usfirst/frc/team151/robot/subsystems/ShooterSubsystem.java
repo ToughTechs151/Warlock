@@ -14,10 +14,7 @@ import edu.wpi.first.wpilibj.Talon;
  */
 public class ShooterSubsystem extends Subsystem {
 	private SpeedController wheelSpinner = null;
-	private Encoder wheelEncoder = null;
-	
-	private static int channel1 = 0;
-	private static int channel2 = 1;
+	public Encoder wheelEncoder = null;
 	
 	private boolean isStopped = false;
 	
@@ -37,7 +34,7 @@ public class ShooterSubsystem extends Subsystem {
 	private static final double V180 = 358.3;
 	
 	//pulses 1440 pulses per rev
-	private static final double DISTANCE_PER_PULSE = 6 * Math.PI / 1440; //TODO need to change this, in inches
+	private static final double DISTANCE_PER_PULSE = 8 * Math.PI / 360; //TODO need to change this, in inches
 	
 	private static final double MOTOR_MAX_RPM = 5000; //TODO change this(?)
 	
@@ -50,7 +47,7 @@ public class ShooterSubsystem extends Subsystem {
 	public ShooterSubsystem() {
 		System.out.println("Starting ShooterSubsystem constructor");
 		wheelSpinner = new Talon(RobotMap.shooterMotor);
-		wheelEncoder = new Encoder(channel1, channel2);
+		wheelEncoder = new Encoder(RobotMap.encoderA, RobotMap.encoderB);
 		wheelEncoder.reset();
 		wheelEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 		System.out.println("Shooter initialized");

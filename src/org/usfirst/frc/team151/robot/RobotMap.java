@@ -31,14 +31,12 @@ public class RobotMap {
 	public static int secondaryJoystick = 1;
 	
 	
-	public static int leftRearA = 0;
-	public static int leftRearB = 1;
-	public static int leftFrontA = 4;
-	public static int leftFrontB = 5;
-	public static int rightFrontA = 7;
-	public static int rightFrontB = 8;
-//	public static int rightRear1 = 6;
-//	public static int rightRear2 = 7;
+	public static int leftRearA = 1;
+	public static int leftRearB = 0;
+	public static int rightFrontA = 3;
+	public static int rightFrontB = 2;
+	public static int encoderA = 4;
+	public static int encoderB = 5;
 	
 	//public static SPI.Port SPI_port_Gyro = new SPI.Port(0);
 	// If you are using multiple modules, make sure to define both the port
