@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class DriveStraightCommand extends Command {
 	
-//	PIDController driverPid = null;
+	PIDController driverPid = null;
 	double distance = 0;
 	boolean isDrive = false;
 	
@@ -22,30 +22,30 @@ public class DriveStraightCommand extends Command {
     public DriveStraightCommand(double distanceToTravel) {
     	System.out.println("Entering DriveStraightCommand constructor");
     	requires(Robot.mecanumDriveSubsystem);
-//    	driverPid = new PIDController(0.5, 0.01, 0.0, new PIDSource() {
-//			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
-//
-//			@Override
-//			public double pidGet() {
-//				return Robot.mecanumDriveSubsystem.getDistanceRemaining();
-//			}
-//
-//			@Override
-//			public void setPIDSourceType(PIDSourceType pidSource) {
-//				m_sourceType = pidSource;
-//			}
-//
-//			@Override
-//			public PIDSourceType getPIDSourceType() {
-//				return m_sourceType;
-//			}
-//		}, new PIDOutput() {
-//			@Override
-//			public void pidWrite(double d) {
-////				Robot.mecanumDriveSubsystem.drive(Robot.primaryDriverOi);
-//				write = d;
-//			}
-//		});
+    	driverPid = new PIDController(0.5, 0.01, 0.0, new PIDSource() {
+			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
+
+			@Override
+			public double pidGet() {
+				return Robot.mecanumDriveSubsystem.getDistanceRemaining();
+			}
+
+			@Override
+			public void setPIDSourceType(PIDSourceType pidSource) {
+				m_sourceType = pidSource;
+			}
+
+			@Override
+			public PIDSourceType getPIDSourceType() {
+				return m_sourceType;
+			}
+		}, new PIDOutput() {
+			@Override
+			public void pidWrite(double d) {
+//				Robot.mecanumDriveSubsystem.drive(Robot.primaryDriverOi);
+				write = d;
+			}
+		});
     	distance = distanceToTravel;
 //    	driverPid.reset();
     	System.out.println("Finishing DriveStraightCommand constructor");
@@ -57,10 +57,10 @@ public class DriveStraightCommand extends Command {
     protected void initialize() {
     	Robot.mecanumDriveSubsystem.leftRearEncoder.reset();
     	Robot.mecanumDriveSubsystem.rightFrontEncoder.reset();
-//    	driverPid.reset();
-//		driverPid.enable();
-//		driverPid.setSetpoint(distance);
-//		driverPid.setAbsoluteTolerance(0.01);
+    	driverPid.reset();
+		driverPid.enable();
+		driverPid.setSetpoint(distance);
+		driverPid.setAbsoluteTolerance(0.01);
 //		distance = Robot.gearVision.getDistance();
     }
 

@@ -5,7 +5,7 @@ import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.GearSubsystem;
 //import org.usfirst.frc.team151.robot.subsystems.LowGoalDumperSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
-import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
+//import org.usfirst.frc.team151.robot.subsystems.RopeClimberSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
 import org.usfirst.frc.team151.robot.commands.AutonomousGearCenter;
 import org.usfirst.frc.team151.robot.commands.AutonomousGearLeft;
@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
 
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
 	public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-	public static final RopeClimberSubsystem ropeClimberSubsystem = new RopeClimberSubsystem();
+//	public static final RopeClimberSubsystem ropeClimberSubsystem = new RopeClimberSubsystem();
 //	public static final LowGoalDumperSubsystem lowGoalDumperSubsystem = new LowGoalDumperSubsystem();
 //	public static final GearSubsystem gearSubsystem = new GearSubsystem();
 	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();

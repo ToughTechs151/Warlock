@@ -45,7 +45,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 */
 //	public static final double distancePerPulse = 0.0130899694;
 //	public static final double distancePerPulse = 0.0065449847;
-	public static final double distancePerPulse = 0.0523598776;
+	public static final double DISTANCE_PER_PULSE = 0.0523598776;
 
 	public MecanumDriveSubsystem() {
 		System.out.println("Entering MecanumDriveSubsystem constructor");
@@ -61,9 +61,9 @@ public class MecanumDriveSubsystem extends Subsystem {
 		leftRearEncoder = new Encoder(RobotMap.leftRearB, RobotMap.leftRearA, false, Encoder.EncodingType.k4X);
 		
 //		leftFrontEncoder.setDistancePerPulse(distancePerPulse);
-		rightFrontEncoder.setDistancePerPulse(distancePerPulse);
+		rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 //		rightRearEncoder.setDistancePerPulse(distancePerPulse);
-		leftRearEncoder.setDistancePerPulse(distancePerPulse);
+		leftRearEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 		
 		leftRearEncoder.setReverseDirection(true);
 		
@@ -159,11 +159,11 @@ public class MecanumDriveSubsystem extends Subsystem {
 		return ((leftFrontEncoder.getRaw() + rightFrontEncoder.getRaw() + leftRearEncoder.get() + rightRearEncoder.get())/4);
 	}
 	
-	@SuppressWarnings("deprecation")
-	public double getTimeTraveled () { //The current period of the counter in seconds
-		return ((leftFrontEncoder.getPeriod() + rightFrontEncoder.getPeriod() + leftRearEncoder.getPeriod() + rightRearEncoder.getPeriod())/4);
-	}
-	
+//	@SuppressWarnings("deprecation")
+//	public double getTimeTraveled () { //The current period of the counter in seconds
+//		return ((leftFrontEncoder.getPeriod() + rightFrontEncoder.getPeriod() + leftRearEncoder.getPeriod() + rightRearEncoder.getPeriod())/4);
+//	}
+//	
 	public double getRateOfEncoders() { // The current rate of the counter in units/sec
 		return ((leftFrontEncoder.getRate() + rightFrontEncoder.getRate() + leftRearEncoder.getRate() + rightRearEncoder.getRate())/4);
 	}

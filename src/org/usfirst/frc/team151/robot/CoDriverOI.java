@@ -1,6 +1,6 @@
 package org.usfirst.frc.team151.robot;
 
-import org.usfirst.frc.team151.robot.commands.ClimbRopeCommand;
+//import org.usfirst.frc.team151.robot.commands.ClimbRopeCommand;
 import org.usfirst.frc.team151.robot.commands.ReverseAgitatorCommand;
 import org.usfirst.frc.team151.robot.commands.ShootBallsCommand;
 import org.usfirst.frc.team151.robot.commands.StartAgitatorCommand;
@@ -27,7 +27,7 @@ public class CoDriverOI extends OI{
 		leftBumper = new JoystickButton(joystick, 5);
 		leftTrigger = new JoystickButton(joystick, 7);
 		
-		y.whenPressed(new ClimbRopeCommand());
+//		y.whenPressed(new ClimbRopeCommand());
 		rightTrigger.whenPressed(new StartShooterCommandGroup());
 		rightBumper.whenPressed(new StopShooterCommandGroup());
 		leftBumper.whenPressed(new ReverseAgitatorCommand());
