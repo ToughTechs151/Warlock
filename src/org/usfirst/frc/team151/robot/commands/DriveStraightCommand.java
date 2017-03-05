@@ -19,7 +19,7 @@ public class DriveStraightCommand extends Command {
     public DriveStraightCommand(double distanceToTravel) {
     	System.out.println("Entering DriveStraightCommand constructor");
     	requires(Robot.mecanumDriveSubsystem);
-    	driverPid = new PIDController(0.5, 0.0, 0.0, new PIDSource() {
+    	driverPid = new PIDController(0.25, 0.0, 0.0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
 			@Override
@@ -40,7 +40,7 @@ public class DriveStraightCommand extends Command {
 			@Override
 			public void pidWrite(double d) {
 //				Robot.mecanumDriveSubsystem.drive(Robot.primaryDriverOi);
-				Robot.mecanumDriveSubsystem.drive(0.0, 0.25 * d, 0.0);
+				Robot.mecanumDriveSubsystem.drive(0.0, d, 0.0);
 			}
 		});
     	distance = distanceToTravel;
