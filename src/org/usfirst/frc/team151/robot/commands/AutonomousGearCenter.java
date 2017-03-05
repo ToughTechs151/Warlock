@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutonomousGearCenter extends CommandGroup {
 
     public AutonomousGearCenter() {
-    	addSequential(new DriveStraightCommand(4));
-    	addSequential(new GearVisionDriveCommand());
+    	addSequential(new DriveStraightCommand(12));
+    	addSequential(new AutoGearDriveCommand(12));
     }
 }

@@ -1,7 +1,6 @@
 package org.usfirst.frc.team151.robot.subsystems;
 
 import org.usfirst.frc.team151.robot.OI;
-import org.usfirst.frc.team151.robot.Robot;
 import org.usfirst.frc.team151.robot.RobotMap;
 import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
 
@@ -27,7 +26,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 	private RobotDrive robotDrive = null;
 	
 //	private Encoder leftFrontEncoder = null; //TODO
-	public Encoder rightFrontEncoder = null; //TODO
+//	public Encoder rightFrontEncoder = null; //TODO
 //	private Encoder rightRearEncoder = null;
 	public Encoder leftRearEncoder = null;
 	
@@ -42,9 +41,8 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 * PUT IN THE VALUE THAT RESULTS :
 	 * 2 * PI * R/12 / #OFPULSES FOR DISTANCEPERPULSE IN FEET
 	 */
-//	public static final double distancePerPulse = 0.0130899694;
-//	public static final double distancePerPulse = 0.0065449847;
-	public static final double DISTANCE_PER_PULSE = Math.PI * 6 * 2 / 360;
+//	public static final double DISTANCE_PER_PULSE = Math.PI * 6 * 2 / 360;
+	public static final double DISTANCE_PER_PULSE = 0.10471975667;
 
 	public MecanumDriveSubsystem() {
 		System.out.println("Entering MecanumDriveSubsystem constructor");
@@ -53,16 +51,16 @@ public class MecanumDriveSubsystem extends Subsystem {
 		rightRearSpeedController = new Talon(RobotMap.rightRearMotor);
 		leftRearSpeedController = new Talon(RobotMap.leftRearMotor);
 		
+//		rightFrontEncoder = new Encoder(RobotMap.rightFrontB, RobotMap.rightFrontA, false, Encoder.EncodingType.k4X);
+//		leftRearEncoder = new Encoder(RobotMap.leftRearB, RobotMap.leftRearA, false, Encoder.EncodingType.k4X);
+		leftRearEncoder = new Encoder(RobotMap.leftRearA, RobotMap.leftRearB);
 		
-		rightFrontEncoder = new Encoder(RobotMap.rightFrontB, RobotMap.rightFrontA, false, Encoder.EncodingType.k4X);
-		leftRearEncoder = new Encoder(RobotMap.leftRearB, RobotMap.leftRearA, false, Encoder.EncodingType.k4X);
-		
-		rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
+//		rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 		leftRearEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 		
 		leftRearEncoder.setReverseDirection(true);
 		
-		rightFrontEncoder.reset();
+//		rightFrontEncoder.reset();
 		leftRearEncoder.reset();
 		
 		gyro = new ADXRS450_Gyro();
@@ -89,14 +87,8 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 */
 	public void drive(double x, double y, double rotation) {
 		System.out.println("in x y rotation drive method");
+		log();
 		robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle());
-		System.out.println("leftRear encoder rate: " + leftRearEncoder.getRate() + 
-				"\t\tleftRear encoder distance: " + leftRearEncoder.getDistance());
-//		System.out.println("rightFront encoder rate: " + rightFrontEncoder.getRate() + 
-//				"\t\trightFront encoder distance: " + rightFrontEncoder.getDistance());
-//		System.out.println("leftRear encoder pulses: " + leftRearEncoder.get() + 
-//				"\t\trightFront encoder pulses: " + rightFrontEncoder.get());
-		System.out.println("leftRear encoder pulses: " + leftRearEncoder.get());
 	}
 	
 	/**
@@ -109,7 +101,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 		double y = threshold(joystick.getRawAxis(1), oi); //1 is y-axis
 		double z = threshold(joystick.getRawAxis(2), oi); //2 is z-axis 
 		robotDrive.mecanumDrive_Cartesian(x, y, z, gyro.getAngle());
-		System.out.println("count: " + rightFrontEncoder.get());
+		System.out.println("count: " + leftRearEncoder.get());
 	}
 	
 	public double threshold (double rawAxis, OI oi) {
@@ -130,7 +122,9 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 * Log information to dashboard
 	 */
 	public void log() {
-		SmartDashboard.putData("Gyro", gyro);
+		System.out.println("leftRear encoder rate: " + leftRearEncoder.getRate() + 
+				"\t\tleftRear encoder distance: " + leftRearEncoder.getDistance());
+		System.out.println("leftRear encoder pulses: " + leftRearEncoder.get());
 	}
 	
 	public double getDistanceTraveled() {
@@ -143,7 +137,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 	
 	public void resetAll() {
 		leftRearEncoder.reset();
-		rightFrontEncoder.reset();
+//		rightFrontEncoder.reset();
 		gyro.reset();
 	}
 }
