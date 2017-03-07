@@ -18,7 +18,6 @@ public class ShootBallsCommand extends Command {
 
     public ShootBallsCommand(double idealRpm) {
     	requires(Robot.shooterSubsystem);
-    	rpm = idealRpm;
     	shooterPid = new PIDController(0.5, 0.01, 0.0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kRate;
 
@@ -40,7 +39,7 @@ public class ShootBallsCommand extends Command {
 			@Override
 			public void pidWrite(double d) {
 //				Robot.mecanumDriveSubsystem.drive(Robot.primaryDriverOi);
-				Robot.shooterSubsystem.shootBalls(rpm);
+				Robot.shooterSubsystem.shootBalls();
 			}
 		});
 //    	driverPid.reset();

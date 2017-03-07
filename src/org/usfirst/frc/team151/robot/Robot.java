@@ -14,6 +14,7 @@ import org.usfirst.frc.team151.robot.commands.StartShooterCommandGroup;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
@@ -47,6 +48,9 @@ public class Robot extends IterativeRobot {
 	public static BoilerVision boilerVision = null;
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
+	
+	Preferences preference = null;
+	public static double distanceToTravel;
 
 	private SendableChooser <AutoModes> autoChooser = new SendableChooser<AutoModes>();
 
@@ -72,6 +76,10 @@ public class Robot extends IterativeRobot {
 
 		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
+		
+		preference = Preferences.getInstance();
+		distanceToTravel = preference.getDouble("DistanceToTravel", 12.0);
+		
 		autoChooser.addDefault("AutoGearCenter", AutoModes.AutoGearCenter);
 		autoChooser.addDefault("AutoGearLeft", AutoModes.AutoGearLeft);
 		autoChooser.addDefault("AutoGearRight", AutoModes.AutoGearRight);
@@ -124,7 +132,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutonomousGearCenter();
 			break;
 		case AutoGearRight:
-			autonomousCommand = new DriveStraightCommand(Math.PI * 6 * 2 / 360);
+			autonomousCommand = new DriveStraightCommand(distanceToTravel);
 			break;
 		case AutoShooter:
 			autonomousCommand = new StartShooterCommandGroup();
