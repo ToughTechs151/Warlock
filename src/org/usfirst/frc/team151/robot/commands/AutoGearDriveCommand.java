@@ -62,6 +62,7 @@ public class AutoGearDriveCommand extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.mecanumDriveSubsystem.startLed();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -72,6 +73,7 @@ public class AutoGearDriveCommand extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.gearVision.stopVision();
+		Robot.mecanumDriveSubsystem.stopLed();
 		Robot.mecanumDriveSubsystem.drive(0, 0, 0);
 		Robot.mecanumDriveSubsystem.leftRearEncoder.reset();
 		Robot.mecanumDriveSubsystem.gyro.reset();

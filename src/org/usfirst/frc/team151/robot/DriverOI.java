@@ -21,7 +21,7 @@ public class DriverOI extends OI{
 		rightBumper = new JoystickButton(joystick, 6);
 		leftTrigger = new JoystickButton(joystick, 7);
 		rightTrigger = new JoystickButton(joystick, 8); 
-		back = new JoystickButton(joystick, 9);
+		x = new JoystickButton(joystick, 1);
 		
 		//checks to see if buttons are pressed
 		leftTrigger.whenPressed(new PickUpCommand());
@@ -29,7 +29,7 @@ public class DriverOI extends OI{
 		leftBumper.whenPressed(new ReversePickupCommand());
 		leftBumper.whenReleased(new StopPickupCommand());
 		
-		back.whenPressed(new StartBoilerVisionCommand());
+		x.whenPressed(new StartBoilerVisionCommand());
 	}
 
 }

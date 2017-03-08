@@ -9,7 +9,7 @@ import org.usfirst.frc.team151.robot.commands.AutonomousGearLeft;
 import org.usfirst.frc.team151.robot.commands.AutonomousGearRight;
 import org.usfirst.frc.team151.robot.commands.DriveStraightCommand;
 import org.usfirst.frc.team151.robot.commands.StartShooterCommandGroup;
-//import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
 //TODO UNCOMMENT AGITATOR SUBSYSTEM LATER
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
@@ -35,12 +35,13 @@ public class Robot extends IterativeRobot {
 		AutoGearCenter,
 		AutoGearLeft,
 		AutoGearRight,
-		AutoShooter
+		AutoShooter,
+		AutoTestingStraight
 	}
 
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
 	public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-//	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
+	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
 
 	//Initialize cameras in roboInit()!!!!!!
@@ -131,8 +132,11 @@ public class Robot extends IterativeRobot {
 		case AutoGearCenter:
 			autonomousCommand = new AutonomousGearCenter();
 			break;
-		case AutoGearRight:
+		case AutoTestingStraight:
 			autonomousCommand = new DriveStraightCommand(distanceToTravel);
+			break;
+		case AutoGearRight:
+			autonomousCommand = new AutonomousGearRight();
 			break;
 		case AutoShooter:
 			autonomousCommand = new StartShooterCommandGroup();

@@ -17,7 +17,8 @@ public class StartBoilerVisionCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-//    	Robot.boilerVision.startVision();
+    	Robot.boilerVision.startVision();
+    	Robot.mecanumDriveSubsystem.startLed();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -32,6 +33,7 @@ public class StartBoilerVisionCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.mecanumDriveSubsystem.stopLed();
 //    	DriveStraightCommand drive = new DriveStraightCommand(Robot.boilerVision.getDistance());
     }
 

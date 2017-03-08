@@ -23,7 +23,7 @@ public class ShootBallsCommand extends Command {
 
 			@Override
 			public double pidGet() {
-				return Robot.mecanumDriveSubsystem.getDistanceTraveled();
+				return Robot.shooterSubsystem.getCurrentWheelRpm();
 			}
 
 			@Override

@@ -9,6 +9,5 @@ public class StartShooterCommandGroup extends CommandGroup {
 	public StartShooterCommandGroup() {
 		addParallel(new StartBoilerVisionCommand());
 		addParallel(new ShootBallsCommand(Robot.boilerVision.getDistanceFromCenter()));
-//		addParallel(new StartAgitatorCommand()); TODO UNCOMMENT THIS
 	}
 }

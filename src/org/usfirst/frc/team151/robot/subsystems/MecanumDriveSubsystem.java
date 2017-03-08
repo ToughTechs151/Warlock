@@ -7,6 +7,7 @@ import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -32,6 +33,8 @@ public class MecanumDriveSubsystem extends Subsystem {
 	
 	public static ADXRS450_Gyro gyro = null;
 	
+	Relay ledRelay = null;
+	
 	public static final double normalMultiplier = 0.5;
 	public static final double creepMultiplier = 0.25;
 	public static final double turboMultiplier = 1.0;
@@ -50,6 +53,8 @@ public class MecanumDriveSubsystem extends Subsystem {
 		rightFrontSpeedController = new Talon(RobotMap.rightFrontMotor);
 		rightRearSpeedController = new Talon(RobotMap.rightRearMotor);
 		leftRearSpeedController = new Talon(RobotMap.leftRearMotor);
+		
+		ledRelay = new Relay(RobotMap.ledLights);
 		
 //		rightFrontEncoder = new Encoder(RobotMap.rightFrontB, RobotMap.rightFrontA, false, Encoder.EncodingType.k4X);
 //		leftRearEncoder = new Encoder(RobotMap.leftRearB, RobotMap.leftRearA, false, Encoder.EncodingType.k4X);
@@ -134,6 +139,14 @@ public class MecanumDriveSubsystem extends Subsystem {
 //	public double getDistanceRemaining() {
 //		return (totalDistance - getDistanceTraveled());
 //	}
+	
+	public void startLed() {
+		ledRelay.set(Relay.Value.kOn);
+	}
+	
+	public void stopLed() {
+		ledRelay.set(Relay.Value.kOff);
+	}
 	
 	public void resetAll() {
 		leftRearEncoder.reset();
