@@ -12,12 +12,14 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ShootBallsCommand extends Command {
-	
-	PIDController shooterPid = null;
-	private double rpm = 0;
 
-    public ShootBallsCommand(double idealRpm) {
-    	requires(Robot.shooterSubsystem);
+//	PIDController shooterPid = null;
+//	private double rpm = 0;
+
+	public ShootBallsCommand() {
+		requires(Robot.shooterSubsystem);
+		//TODO add PID after testing
+		/*
     	shooterPid = new PIDController(0.5, 0.01, 0.0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kRate;
 
@@ -46,35 +48,37 @@ public class ShootBallsCommand extends Command {
     	System.out.println("Finishing DriveStraightCommand constructor");
 		shooterPid.setSetpoint(rpm);
 		shooterPid.setAbsoluteTolerance(0.5);
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	shooterPid.reset();
-    	Robot.shooterSubsystem.wheelEncoder.reset();
-		shooterPid.enable();
-    }
+		 */
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.shooterSubsystem.shootBalls();
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+//		shooterPid.reset();
+		Robot.shooterSubsystem.wheelEncoder.reset();
+//		shooterPid.enable();
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return shooterPid.onTarget();
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		Robot.shooterSubsystem.shootBalls();
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	Robot.shooterSubsystem.wheelEncoder.reset();
-    	Robot.shooterSubsystem.stopShootBalls();
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return false;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+		Robot.shooterSubsystem.wheelEncoder.reset();
+//		Robot.shooterSubsystem.stopShootBalls();
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

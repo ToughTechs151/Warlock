@@ -45,13 +45,10 @@ public class AutoGearDriveCommand extends Command {
 				if(distFromCenter < -10) {
 					//TODO fix z-axis rotation power
 					z = 0.125;
-					System.out.println("AutoGearDriveCommand execute - turning right");
 				} else if(distFromCenter > 10) {
 					z = -0.125;
-					System.out.println("AutoGearDriveCommand execute - turning left");
 				} else {
 					z = 0.0;
-					System.out.println("AutoGearDriveCommand execute - not turning");
 				}
 				Robot.mecanumDriveSubsystem.drive(0.0, d, z);
 			}

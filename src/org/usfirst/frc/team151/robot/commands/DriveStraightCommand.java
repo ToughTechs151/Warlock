@@ -56,7 +56,6 @@ public class DriveStraightCommand extends Command {
     	Robot.mecanumDriveSubsystem.leftRearEncoder.reset();
 		driverPid.enable();
     	SmartDashboard.putData("Drive PIDController", driverPid);
-//		distance = Robot.gearVision.getDistance();
     }
 
     // Make this return true when this Command no longer needs to run execute()

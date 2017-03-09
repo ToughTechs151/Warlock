@@ -16,14 +16,15 @@ public class DriverOI extends OI{
 
 	public DriverOI(int joystickChannel) {
 		super(joystickChannel);
-		// TODO Auto-generated constructor stub
 		leftBumper = new JoystickButton(joystick, 5);
 		rightBumper = new JoystickButton(joystick, 6);
 		leftTrigger = new JoystickButton(joystick, 7);
 		rightTrigger = new JoystickButton(joystick, 8); 
 		x = new JoystickButton(joystick, 1);
 		
-		//checks to see if buttons are pressed
+		//rightTrigger is turbo mode
+		//rightBumper is creep mode
+		
 		leftTrigger.whenPressed(new PickUpCommand());
 		leftTrigger.whenReleased(new StopPickupCommand());
 		leftBumper.whenPressed(new ReversePickupCommand());

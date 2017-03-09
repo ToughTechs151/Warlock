@@ -20,17 +20,14 @@ public class CoDriverOI extends OI{
 	public CoDriverOI(int joystickChannel) {
 		super(joystickChannel);
 		// TODO Auto-generated constructor stub
-		y = new JoystickButton(joystick, 4);
 		rightBumper = new JoystickButton(joystick, 6);
 		rightTrigger = new JoystickButton(joystick, 8);
 		leftBumper = new JoystickButton(joystick, 5);
 		leftTrigger = new JoystickButton(joystick, 7);
 		
-//		y.whenPressed(new ClimbRopeCommand());
 		rightTrigger.whenPressed(new StartShooterCommandGroup());
 		rightBumper.whenPressed(new StopShooterCommandGroup());
 		leftBumper.whenPressed(new ReverseAgitatorCommand());
 		leftBumper.whenReleased(new StopAgitatorCommand());
 	}
-
 }

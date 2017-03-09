@@ -58,9 +58,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-		//TODO NOTE: WHOLE AGITATOR SUBSYSTEM IS CURRENTLY COMMENTED OUT
-		System.out.println("Entering roboInit");
-
 		boilerVision = new BoilerVision(0);
 		gearVision = new GearVision(1);
 
@@ -77,7 +74,6 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putData("Autonomous mode", autoChooser);
 		SmartDashboard.putData("Mecanum Drive", mecanumDriveSubsystem);
-		System.out.println("roboInit finished");
 	}
 	/**
 	 * This function is called once each time the robot enters Disabled mode.
@@ -125,8 +121,6 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new StartShooterCommandGroup();
 		}
 
-		// schedule the autonomous command (example)
-		System.out.println("autonomousCommand is " + autonomousCommand);
 		if (autonomousCommand != null)
 			autonomousCommand.start();
 	}
@@ -145,8 +139,12 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
+		if (autonomousCommand != null) {
 			autonomousCommand.cancel();
+			agitatorSubsystem.stopAgitator();
+			shooterSubsystem.stopShootBalls();
+			//TODO check if vision is on and if so, turn off
+		}
 	}
 
 	/**

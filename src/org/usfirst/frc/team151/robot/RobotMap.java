@@ -14,33 +14,28 @@ public class RobotMap {
 	public static int rightFrontMotor = 3;
 	public static int shooterMotor = 4;
 	public static int spinBallPickup = 5;
-	
-	//Pneumatics-Analog Channel
-	public static int ropeLimitSwitch = 9;
-	
+		
 	//Relay ports
-//	public static int digOutRopeClimber = 0; //Relay port
 	public static int agitatorRelay = 0;
 	public static int ledLights = 1;
 	
-	
+	//OI Ports
 	public static int primaryJoystick = 0;
 	public static int secondaryJoystick = 1;
 	
-	
+	//Encoder ports
 	public static int leftRearA = 1;
 	public static int leftRearB = 0;
 	public static int rightFrontA = 3;
 	public static int rightFrontB = 2;
-	public static int encoderA = 4;
-	public static int encoderB = 5;
+	public static int shooterEncoderA = 4;
+	public static int shooterEncoderB = 5;
 	
 	//Vision HSV Limits
 	static double[] hsvThresholdHue = {40.0, 120.0};
 	static double[] hsvThresholdSaturation = {0.0, 40.0};
 	static double[] hsvThresholdValue = {235.0, 255.0};
 	
-	//public static SPI.Port SPI_port_Gyro = new SPI.Port(0);
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
