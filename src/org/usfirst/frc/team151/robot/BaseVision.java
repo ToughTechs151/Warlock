@@ -90,9 +90,9 @@ public class BaseVision {
 		this.source = source0;
 		// Step HSV_Threshold0:
 		Mat hsvThresholdInput = source0;
-		double[] hsvThresholdHue = {0.0, 46.38225255972697};
-		double[] hsvThresholdSaturation = {0.0, 6.9624573378839765};
-		double[] hsvThresholdValue = {252.24820143884895, 255.0};
+		double[] hsvThresholdHue = RobotMap.hsvThresholdHue;
+		double[] hsvThresholdSaturation = RobotMap.hsvThresholdSaturation;
+		double[] hsvThresholdValue = RobotMap.hsvThresholdValue;
 		hsvThreshold(hsvThresholdInput, hsvThresholdHue, hsvThresholdSaturation, hsvThresholdValue, hsvThresholdOutput);
 
 		// Step Blur0:
