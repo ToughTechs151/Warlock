@@ -31,7 +31,7 @@ public class GearVision extends BaseVision {
 	}
 	
 	public double getDistance() {
-		return super.getDistance(WIDTH_OF_OBJECT, FOCAL_LENGTH, this);
+		return super.getGearDistance(WIDTH_OF_OBJECT, FOCAL_LENGTH);
 	}
 	
 	@Override

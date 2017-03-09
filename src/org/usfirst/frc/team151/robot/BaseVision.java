@@ -13,6 +13,8 @@ import org.opencv.imgproc.*;
 
 public class BaseVision {
 
+	protected static final double FOCAL_LENGTH = 707.567;
+	
 	protected double currentRectWidthPix;
 	protected double currentRectHeightPix;
 
@@ -47,6 +49,7 @@ public class BaseVision {
    for each separate class, and should be distinct for each class
 	 */
 	public void startVision() {
+		Robot.mecanumDriveSubsystem.startLed();
 		visionThread = new Thread(() -> {
 			CvSink frame = getVideoFrame();
 			// Setup a CvSource. This will send images back to the Dashboard
@@ -79,9 +82,10 @@ public class BaseVision {
 	
 	public void stopVision() {
 		visionThread.interrupt();
+		Robot.mecanumDriveSubsystem.stopLed();
 	}
 
-	private Mat process(Mat source0) {
+	private Mat process(Mat source0) {		
 		//TODO INSERT CODE FOR EACH SEPARATE VISION CLASS
 		this.source = source0;
 		// Step HSV_Threshold0:
@@ -126,6 +130,7 @@ public class BaseVision {
 		Mat drawCenterOfRectInput = source0;
 		drawCenterOfRect(drawCenterOfRectInput);
 
+		Imgproc.putText(source0, getBoilerDistance(currentRectHeightPix, FOCAL_LENGTH) + "", new Point(0, 0), 0, 2.0, new Scalar(0, 255, 0));
 		return source0;
 	}
 
@@ -305,13 +310,12 @@ public class BaseVision {
 		Imgproc.circle(source, centerPoint, 5, new Scalar(0, 0, 255, 1));
 	}
 
-	public double getDistance(double length, double focalLength, BaseVision vis) {
-		if(vis instanceof GearVision) {
-			return length*focalLength/currentRectHeightPix;
-		} else if(vis instanceof BoilerVision) {
-			return length*focalLength/currentRectWidthPix;
-		}
-		return -1;
+	public double getGearDistance(double length, double focalLength) {
+		return length*focalLength/currentRectHeightPix;
+	}
+	
+	public double getBoilerDistance(double length, double focalLength) {
+		return length*focalLength/currentRectWidthPix;
 	}
 
 	public double getDistanceFromCenter() {

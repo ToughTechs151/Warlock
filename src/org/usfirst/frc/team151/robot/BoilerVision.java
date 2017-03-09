@@ -30,7 +30,7 @@ public class BoilerVision extends BaseVision {
 	}
 	
 	public double getDistance() {
-		return super.getDistance(HEIGHT_OF_OBJECT, FOCAL_LENGTH, this);
+		return super.getBoilerDistance(HEIGHT_OF_OBJECT, FOCAL_LENGTH);
 	}
 	
 	@Override

@@ -42,7 +42,7 @@ public class ShootBallsCommand extends Command {
 				Robot.shooterSubsystem.shootBalls();
 			}
 		});
-//    	driverPid.reset();
+    	shooterPid.reset();
     	System.out.println("Finishing DriveStraightCommand constructor");
 		shooterPid.setSetpoint(rpm);
 		shooterPid.setAbsoluteTolerance(0.5);

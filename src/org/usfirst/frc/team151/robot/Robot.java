@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team151.robot;
 
 import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
@@ -10,14 +9,10 @@ import org.usfirst.frc.team151.robot.commands.AutonomousGearRight;
 import org.usfirst.frc.team151.robot.commands.DriveStraightCommand;
 import org.usfirst.frc.team151.robot.commands.StartShooterCommandGroup;
 import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
-//TODO UNCOMMENT AGITATOR SUBSYSTEM LATER
-
-import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -30,7 +25,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
+	
 	public enum AutoModes {
 		AutoGearCenter,
 		AutoGearLeft,
@@ -51,10 +46,10 @@ public class Robot extends IterativeRobot {
 	public static CoDriverOI secondaryDriverOi = null;
 	
 	Preferences preference = null;
+	
 	public static double distanceToTravel;
 
 	private SendableChooser <AutoModes> autoChooser = new SendableChooser<AutoModes>();
-
 	private Command autonomousCommand;
 
 	/**
@@ -80,14 +75,8 @@ public class Robot extends IterativeRobot {
 		autoChooser.addDefault("AutoGearRight", AutoModes.AutoGearRight);
 		autoChooser.addObject("AutoShooter", AutoModes.AutoShooter);
 
-		//chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Autonomous mode", autoChooser);
 		SmartDashboard.putData("Mecanum Drive", mecanumDriveSubsystem);
-//		SmartDashboard.putData(Robot.ropeClimberSubsystem);
-		//SmartDashboard.putData("Gyro", mecanumDriveSubsystem.gyro);
-		//TODO test with actual robot
-		//		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
-		//		mecanumDriveSubsystem.gyro.startLiveWindowMode();
 		System.out.println("roboInit finished");
 	}
 	/**
@@ -168,7 +157,6 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
 		mecanumDriveSubsystem.gyro.startLiveWindowMode();
-
 	}
 
 	/**

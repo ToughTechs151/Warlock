@@ -7,7 +7,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class StartShooterCommandGroup extends CommandGroup {
 
 	public StartShooterCommandGroup() {
-		addParallel(new StartBoilerVisionCommand());
-		addParallel(new ShootBallsCommand(Robot.boilerVision.getDistanceFromCenter()));
+		addSequential(new StartBoilerVisionCommand());
+		addSequential(new StartAgitatorCommand());
+		addSequential(new ShootBallsCommand(Robot.boilerVision.getDistance()));		
 	}
 }
