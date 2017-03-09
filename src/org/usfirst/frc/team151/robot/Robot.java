@@ -55,12 +55,6 @@ public class Robot extends IterativeRobot {
 
 	private SendableChooser <AutoModes> autoChooser = new SendableChooser<AutoModes>();
 
-	Accelerometer accel = new BuiltInAccelerometer();
-
-	double accelX;
-	double accelY;
-	double accelZ;
-
 	private Command autonomousCommand;
 
 	/**
@@ -105,7 +99,7 @@ public class Robot extends IterativeRobot {
 	public void disabledInit() {
 
 	}
-
+ 
 	@Override
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
@@ -174,12 +168,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
 		mecanumDriveSubsystem.gyro.startLiveWindowMode();
-		accelX = accel.getX();
-		accelY = accel.getY();
-		accelZ = accel.getZ();
-		SmartDashboard.putNumber("Accelerometer X-Value", accelX);
-		SmartDashboard.putNumber("Accelerometer Y-Value", accelY);
-		SmartDashboard.putNumber("Accelerometer Z-Value", accelZ);
+
 	}
 
 	/**
