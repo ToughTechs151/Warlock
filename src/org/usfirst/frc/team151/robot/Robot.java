@@ -38,6 +38,8 @@ public class Robot extends IterativeRobot {
 	public static final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
 	public static final AgitatorSubsystem agitatorSubsystem = new AgitatorSubsystem();
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
+	
+	public static final Logger logger = new Logger();
 
 	//Initialize cameras in roboInit()!!!!!!
 	public static GearVision gearVision = null;
@@ -152,6 +154,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		logger.log(); //TODO make sure I did this right, por favor
 		Scheduler.getInstance().run();
 		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
 		mecanumDriveSubsystem.gyro.startLiveWindowMode();

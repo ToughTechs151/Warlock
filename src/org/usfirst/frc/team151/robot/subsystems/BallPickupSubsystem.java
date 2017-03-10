@@ -38,4 +38,8 @@ public class BallPickupSubsystem extends Subsystem {
     public void reversePickupBalls() {
     	spinBallPickup.set(0.75);
     }
+    
+    public void log() {
+    	System.out.println("Ball Pick-up Relay: " + spinBallPickup.get());
+    }
 }

@@ -36,5 +36,9 @@ public class AgitatorSubsystem extends Subsystem {
     public void reverseAgitator() {
     	agitator.set(Value.kReverse);
     }
+    
+    public void log() {
+    	System.out.println("Agitator motor relay: " + agitator.get());
+    }
 }
 

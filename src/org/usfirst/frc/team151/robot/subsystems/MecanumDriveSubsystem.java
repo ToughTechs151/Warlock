@@ -127,9 +127,10 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 * Log information to dashboard
 	 */
 	public void log() {
-		System.out.println("leftRear encoder rate: " + leftRearEncoder.getRate() + 
-				"\t\tleftRear encoder distance: " + leftRearEncoder.getDistance());
-		System.out.println("leftRear encoder pulses: " + leftRearEncoder.get());
+		System.out.println("Mecanum leftRear encoder rate: " + leftRearEncoder.getRate() + 
+				"\t\tMecanum leftRear encoder distance: " + leftRearEncoder.getDistance());
+		System.out.println("Mecanum leftRear encoder pulses: " + leftRearEncoder.get());
+		System.out.println("LED in mecanum " + ledRelay.get());
 	}
 	
 	public double getDistanceTraveled() {

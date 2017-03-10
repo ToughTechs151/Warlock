@@ -75,4 +75,9 @@ public class ShooterSubsystem extends Subsystem {
 	public boolean isStopped() {
 		return isStopped;
 	}
+	
+	public void log() {
+		System.out.println("Shooter Encoder Rate: " + wheelEncoder.getRate());
+		System.out.println("Shooter Motor Output: " + wheelSpinner.get());
+	}
 }
