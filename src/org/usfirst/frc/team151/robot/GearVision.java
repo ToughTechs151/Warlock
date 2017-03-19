@@ -22,7 +22,8 @@ public class GearVision extends BaseVision {
 	
 	@Override
 	public void startVision() {
-		super.startVision();
+//		super.startVision(); TODO put this back if we do gears in auto
+		super.startGearVisionFlipped();
 	}
 	
 	@Override

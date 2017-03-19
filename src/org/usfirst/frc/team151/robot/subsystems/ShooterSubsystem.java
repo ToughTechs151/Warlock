@@ -53,15 +53,19 @@ public class ShooterSubsystem extends Subsystem {
 		isStopped = true;
 	}
 
-	public void shootBalls() {
-		if (Math.abs(Robot.boilerVision.getDistance() - 120) < 5) {
-			wheelSpinner.set(V120);
-		} else if (Math.abs(Robot.boilerVision.getDistance() - 84) < 5) {
-			wheelSpinner.set(V84);
-		} else {
-			wheelSpinner.set(0);
-		}
+	public void shootBallsNoVision(double x) {
+		wheelSpinner.set(x);
 	}
+	
+//	public void shootBalls() {
+//		if (Math.abs(Robot.boilerVision.getDistance() - 120) < 5) {
+//			wheelSpinner.set(V120);
+//		} else if (Math.abs(Robot.boilerVision.getDistance() - 84) < 5) {
+//			wheelSpinner.set(V84);
+//		} else {
+//			wheelSpinner.set(0);
+//		}
+//	}
 
 	public double getCurrentWheelRpm() {
 		return wheelEncoder.getRate() * 60 * (1/WHEEL_CIRCUMFERENCE);

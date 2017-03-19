@@ -15,9 +15,12 @@ public class ShootBallsCommand extends Command {
 
 //	PIDController shooterPid = null;
 //	private double rpm = 0;
+	private double speed = 0;
+	private double lastSpeed = 0;
 
-	public ShootBallsCommand() {
+	public ShootBallsCommand(double finalSpeed) {
 		requires(Robot.shooterSubsystem);
+		lastSpeed = finalSpeed;
 		//TODO add PID after testing
 		/*
     	shooterPid = new PIDController(0.5, 0.01, 0.0, new PIDSource() {
@@ -63,7 +66,10 @@ public class ShootBallsCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.shooterSubsystem.shootBalls();
+		if (speed < lastSpeed){
+			speed += 0.01;
+		}
+		Robot.shooterSubsystem.shootBallsNoVision(speed);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

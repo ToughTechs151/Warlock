@@ -9,6 +9,6 @@ public class StartShooterCommandGroup extends CommandGroup {
 	public StartShooterCommandGroup() {
 		addSequential(new StartBoilerVisionCommand());
 		addSequential(new StartAgitatorCommand());
-		addSequential(new ShootBallsCommand());		
+		addSequential(new ShootBallsCommand(1.0));		
 	}
 }

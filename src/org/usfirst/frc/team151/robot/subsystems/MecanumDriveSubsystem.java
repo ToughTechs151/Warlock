@@ -33,8 +33,6 @@ public class MecanumDriveSubsystem extends Subsystem {
 	
 	public static ADXRS450_Gyro gyro = null;
 	
-	Relay ledRelay = null;
-	
 	public static final double normalMultiplier = 0.5;
 	public static final double creepMultiplier = 0.25;
 	public static final double turboMultiplier = 1.0;
@@ -53,8 +51,6 @@ public class MecanumDriveSubsystem extends Subsystem {
 		rightFrontSpeedController = new Talon(RobotMap.rightFrontMotor);
 		rightRearSpeedController = new Talon(RobotMap.rightRearMotor);
 		leftRearSpeedController = new Talon(RobotMap.leftRearMotor);
-		
-		ledRelay = new Relay(RobotMap.ledLights);
 		
 //		rightFrontEncoder = new Encoder(RobotMap.rightFrontB, RobotMap.rightFrontA, false, Encoder.EncodingType.k4X);
 //		leftRearEncoder = new Encoder(RobotMap.leftRearB, RobotMap.leftRearA, false, Encoder.EncodingType.k4X);
@@ -93,7 +89,7 @@ public class MecanumDriveSubsystem extends Subsystem {
 	public void drive(double x, double y, double rotation) {
 		System.out.println("in x y rotation drive method");
 		log();
-		robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle());
+		robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
 	}
 	
 	/**
@@ -105,21 +101,26 @@ public class MecanumDriveSubsystem extends Subsystem {
 		double x = threshold(joystick.getRawAxis(0), oi); //0 is x-axis
 		double y = threshold(joystick.getRawAxis(1), oi); //1 is y-axis
 		double z = threshold(joystick.getRawAxis(2), oi); //2 is z-axis 
-		robotDrive.mecanumDrive_Cartesian(x, y, z, gyro.getAngle());
+		robotDrive.mecanumDrive_Cartesian(x, y, z, 0); // TODO WHAT IS THE FOURTH PARAMETER	
 		System.out.println("count: " + leftRearEncoder.get());
 	}
 	
 	public double threshold (double rawAxis, OI oi) {
 		JoystickButton rbumper = oi.getJoystickButton(6);
 		JoystickButton rtrigger = oi.getJoystickButton(8);
-		if (rbumper.get()) { //TODO check if returns true when pressed
-			return rawAxis * creepMultiplier;
-		}
-		else if (rtrigger.get()) {
-			return rawAxis * turboMultiplier;
+		if (rawAxis >= 0.03) { //adds a deadzone
+			if (rbumper.get()) { //TODO check if returns true when pressed
+				return rawAxis * creepMultiplier;
+			}
+			else if (rtrigger.get()) {
+				return rawAxis * turboMultiplier;
+			}
+			else {
+				return rawAxis * normalMultiplier;
+			}
 		}
 		else {
-			return rawAxis * normalMultiplier;
+			return 0;
 		}
 	}
 	
@@ -130,28 +131,15 @@ public class MecanumDriveSubsystem extends Subsystem {
 		System.out.println("Mecanum leftRear encoder rate: " + leftRearEncoder.getRate() + 
 				"\t\tMecanum leftRear encoder distance: " + leftRearEncoder.getDistance());
 		System.out.println("Mecanum leftRear encoder pulses: " + leftRearEncoder.get());
-		System.out.println("LED in mecanum " + ledRelay.get());
 	}
 	
 	public double getDistanceTraveled() {
 		return (leftRearEncoder.getDistance());
 	}
 	
-//	public double getDistanceRemaining() {
-//		return (totalDistance - getDistanceTraveled());
-//	}
-	
-	public void startLed() {
-		ledRelay.set(Relay.Value.kOn);
-	}
-	
-	public void stopLed() {
-		ledRelay.set(Relay.Value.kOff);
-	}
-	
 	public void resetAll() {
 		leftRearEncoder.reset();
 //		rightFrontEncoder.reset();
-		gyro.reset();
+//		gyro.reset();
 	}
 }

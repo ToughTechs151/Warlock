@@ -28,7 +28,7 @@ public class BallPickupSubsystem extends Subsystem {
     }
     
     public void pickupBalls() {
-    	spinBallPickup.set(-0.75);
+    	spinBallPickup.set(-0.6);
     }
     
     public void stopPickupBalls() {
@@ -36,7 +36,7 @@ public class BallPickupSubsystem extends Subsystem {
     }
     
     public void reversePickupBalls() {
-    	spinBallPickup.set(0.75);
+    	spinBallPickup.set(0.6);
     }
     
     public void log() {

@@ -19,7 +19,7 @@ public class DriveStraightCommand extends Command {
     public DriveStraightCommand(double distanceToTravel) {
     	System.out.println("Entering DriveStraightCommand constructor");
     	requires(Robot.mecanumDriveSubsystem);
-    	driverPid = new PIDController(0.05, 0.0, 0.0, new PIDSource() {
+    	driverPid = new PIDController(0.008, 0.0, 0.0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
 			@Override
@@ -52,7 +52,7 @@ public class DriveStraightCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	driverPid.reset();
-    	Robot.mecanumDriveSubsystem.gyro.reset();
+//    	Robot.mecanumDriveSubsystem.gyro.reset();
     	Robot.mecanumDriveSubsystem.leftRearEncoder.reset();
 		driverPid.enable();
     	SmartDashboard.putData("Drive PIDController", driverPid);
@@ -66,8 +66,8 @@ public class DriveStraightCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	driverPid.disable();
     	driverPid.reset();
+    	driverPid.disable();
     	Robot.mecanumDriveSubsystem.drive(0, 0, 0);
     }
 

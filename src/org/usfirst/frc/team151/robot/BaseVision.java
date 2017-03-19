@@ -14,7 +14,7 @@ import org.opencv.imgproc.*;
 public class BaseVision {
 
 	protected static final double FOCAL_LENGTH = 707.567;
-	
+
 	protected double currentRectWidthPix;
 	protected double currentRectHeightPix;
 
@@ -23,6 +23,7 @@ public class BaseVision {
 
 	//Outputs
 	private Mat source = new Mat();
+	private Mat flipOutput = new Mat();
 	private Mat hsvThresholdOutput = new Mat();
 	private Mat blurOutput = new Mat();
 	private ArrayList<MatOfPoint> findContoursOutput = new ArrayList<MatOfPoint>();
@@ -49,7 +50,6 @@ public class BaseVision {
    for each separate class, and should be distinct for each class
 	 */
 	public void startVision() {
-		Robot.mecanumDriveSubsystem.startLed();
 		visionThread = new Thread(() -> {
 			CvSink frame = getVideoFrame();
 			// Setup a CvSource. This will send images back to the Dashboard
@@ -71,7 +71,9 @@ public class BaseVision {
 					continue;
 				}
 				// Process the image
+				System.out.println("In visionThread before process");
 				mat = process(mat);
+				System.out.println("In visionThread after process");
 				// Give the output stream a new image to display
 				outputStream.putFrame(mat);
 			}
@@ -80,16 +82,53 @@ public class BaseVision {
 		visionThread.start();
 	}
 	
+	public void startGearVisionFlipped() {
+		visionThread = new Thread(() -> {
+			CvSink frame = getVideoFrame();
+			// Setup a CvSource. This will send images back to the Dashboard
+			CvSource outputStream = CameraServer.getInstance().putVideo("Flipped Gear Cam", 640, 480);
+
+			// Mats are very memory expensive. Lets reuse this Mat.
+			Mat mat = new Mat();
+			Mat result = new Mat();
+
+			// This cannot be 'true'. The program will never exit if it is. This
+			// lets the robot stop this thread when restarting robot code or
+			// deploying.
+			while (!Thread.interrupted()) {
+				// Tell the CvSink to grab a frame from the camera and put it
+				// in the source mat.  If there is an error notify the output.
+				if (frame.grabFrame(mat) == 0) {
+					// Send the output the error.
+					outputStream.notifyError(frame.getError());
+					// skip the rest of the current iteration
+					continue;
+				}
+				// Process the image
+				cvFlip(mat, FlipCode.X_AXIS, result);
+				// Give the output stream a new image to display
+				outputStream.putFrame(result);
+			}
+		});
+		visionThread.setDaemon(true);
+		visionThread.start();
+	}
+
 	public void stopVision() {
 		visionThread.interrupt();
-		Robot.mecanumDriveSubsystem.stopLed();
 	}
 
 	private Mat process(Mat source0) {		
 		//TODO INSERT CODE FOR EACH SEPARATE VISION CLASS
 		this.source = source0;
+
+		//Step Flip
+		Mat cvFlipSrc = source0;
+		FlipCode cvFlipFlipcode = FlipCode.X_AXIS;
+		cvFlip(cvFlipSrc, cvFlipFlipcode, cvFlipOutput);
+
 		// Step HSV_Threshold0:
-		Mat hsvThresholdInput = source0;
+		Mat hsvThresholdInput = flipOutput;
 		double[] hsvThresholdHue = RobotMap.hsvThresholdHue;
 		double[] hsvThresholdSaturation = RobotMap.hsvThresholdSaturation;
 		double[] hsvThresholdValue = RobotMap.hsvThresholdValue;
@@ -122,16 +161,16 @@ public class BaseVision {
 		filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
 
 		// Step Bounding_Rectangle:
-		Mat boundingRectInput = source0;
+		Mat boundingRectInput = flipOutput;
 		ArrayList<MatOfPoint> boundingRectInput2 = filterContoursOutput;
 		boundingRect(boundingRectInput, boundingRectInput2);
 
 		//Step center circle:
-		Mat drawCenterOfRectInput = source0;
+		Mat drawCenterOfRectInput = flipOutput;
 		drawCenterOfRect(drawCenterOfRectInput);
 
-		Imgproc.putText(source0, getBoilerDistance(currentRectHeightPix, FOCAL_LENGTH) + "", new Point(0, 0), 0, 2.0, new Scalar(0, 255, 0));
-		return source0;
+		Imgproc.putText(flipOutput, getBoilerDistance(currentRectHeightPix, FOCAL_LENGTH) + "", new Point(0, 0), 0, 2.0, new Scalar(0, 255, 0));
+		return flipOutput;
 	}
 
 	/**
@@ -182,6 +221,44 @@ public class BaseVision {
 		public String toString() {
 			return this.label;
 		}
+	}
+
+
+
+
+	//Outputs
+	private Mat cvFlipOutput = new Mat();
+
+	static {
+		System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+	}
+
+
+
+	/**
+	 * Code used for CV_flip. 
+	 * Per OpenCV spec 0 -> flip on X axis.
+	 * >0 -> flip on Y axis.
+	 * <0 -> flip on both axes.
+	 */
+	public enum FlipCode {
+		X_AXIS(0),
+		Y_AXIS(1),
+		BOTH_AXES(-1);
+		public final int value;
+		FlipCode(int value) {
+			this.value = value;
+		}
+	}	
+
+	/**
+	 * Flips an image along X, Y or both axes.
+	 * @param src Image to flip.
+	 * @param flipcode FlipCode of which direction to flip.
+	 * @param dst flipped version of the Image.
+	 */
+	public void cvFlip(Mat src, FlipCode flipcode, Mat dst) {
+		Core.flip(src, dst, flipcode.value);
 	}
 
 	/**
@@ -313,7 +390,7 @@ public class BaseVision {
 	public double getGearDistance(double length, double focalLength) {
 		return length*focalLength/currentRectHeightPix;
 	}
-	
+
 	public double getBoilerDistance(double length, double focalLength) {
 		return length*focalLength/currentRectWidthPix;
 	}

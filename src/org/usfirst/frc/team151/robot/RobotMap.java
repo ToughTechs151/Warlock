@@ -12,12 +12,12 @@ public class RobotMap {
 	public static int leftRearMotor = 1;
 	public static int leftFrontMotor = 2;
 	public static int rightFrontMotor = 3;
-	public static int shooterMotor = 4;
-	public static int spinBallPickup = 5;
+	public static int shooterMotor = 5;
+	public static int spinBallPickup = 4;
 		
 	//Relay ports
-	public static int agitatorRelay = 0;
-	public static int ledLights = 1;
+	public static int agitatorRelay = 1;
+	public static int ledLights = 0;
 	
 	//OI Ports
 	public static int primaryJoystick = 0;

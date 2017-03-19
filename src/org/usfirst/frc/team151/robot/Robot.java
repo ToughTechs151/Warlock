@@ -1,11 +1,13 @@
 package org.usfirst.frc.team151.robot;
 
 import org.usfirst.frc.team151.robot.subsystems.BallPickupSubsystem;
+import org.usfirst.frc.team151.robot.subsystems.LedSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.MecanumDriveSubsystem;
 import org.usfirst.frc.team151.robot.subsystems.ShooterSubsystem;
-import org.usfirst.frc.team151.robot.commands.AutonomousGearCenter;
-import org.usfirst.frc.team151.robot.commands.AutonomousGearLeft;
-import org.usfirst.frc.team151.robot.commands.AutonomousGearRight;
+import org.usfirst.frc.team151.robot.commands.AutoStraightCenterCommandGroup;
+//import org.usfirst.frc.team151.robot.commands.AutonomousGearCenter;
+//import org.usfirst.frc.team151.robot.commands.AutonomousGearLeft;
+//import org.usfirst.frc.team151.robot.commands.AutonomousGearRight;
 import org.usfirst.frc.team151.robot.commands.DriveStraightCommand;
 import org.usfirst.frc.team151.robot.commands.StartShooterCommandGroup;
 import org.usfirst.frc.team151.robot.subsystems.AgitatorSubsystem;
@@ -27,11 +29,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Robot extends IterativeRobot {
 	
 	public enum AutoModes {
-		AutoGearCenter,
-		AutoGearLeft,
-		AutoGearRight,
+//		AutoGearCenter,
+//		AutoGearLeft,
+//		AutoGearRight,
 		AutoShooter,
-		AutoTestingStraight
+		AutoStraight,
+		AutoStraightCenter
 	}
 
 	public static final MecanumDriveSubsystem mecanumDriveSubsystem = new MecanumDriveSubsystem();
@@ -40,6 +43,7 @@ public class Robot extends IterativeRobot {
 	public static final BallPickupSubsystem ballPickupSubsystem = new BallPickupSubsystem();
 	
 	public static final Logger logger = new Logger();
+	public static final LedSubsystem ledSubsystem = new LedSubsystem();
 
 	//Initialize cameras in roboInit()!!!!!!
 	public static GearVision gearVision = null;
@@ -49,7 +53,7 @@ public class Robot extends IterativeRobot {
 	
 	Preferences preference = null;
 	
-	public static double distanceToTravel;
+	public static double distanceToTravel = 72.0;
 
 	private SendableChooser <AutoModes> autoChooser = new SendableChooser<AutoModes>();
 	private Command autonomousCommand;
@@ -67,12 +71,14 @@ public class Robot extends IterativeRobot {
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
 		
 		preference = Preferences.getInstance();
-		distanceToTravel = preference.getDouble("DistanceToTravel", 12.0);
+		distanceToTravel = preference.getDouble("DistanceToTravelStraight", 12.0);
 		
-		autoChooser.addDefault("AutoGearCenter", AutoModes.AutoGearCenter);
-		autoChooser.addDefault("AutoGearLeft", AutoModes.AutoGearLeft);
-		autoChooser.addDefault("AutoGearRight", AutoModes.AutoGearRight);
+//		autoChooser.addDefault("AutoGearCenter", AutoModes.AutoGearCenter);
+//		autoChooser.addDefault("AutoGearLeft", AutoModes.AutoGearLeft);
+//		autoChooser.addDefault("AutoGearRight", AutoModes.AutoGearRight);
 		autoChooser.addObject("AutoShooter", AutoModes.AutoShooter);
+		autoChooser.addObject("AutoStraight", AutoModes.AutoStraight);
+		autoChooser.addObject("AutoStraightCenter", AutoModes.AutoStraightCenter);
 
 		SmartDashboard.putData("Autonomous mode", autoChooser);
 		SmartDashboard.putData("Mecanum Drive", mecanumDriveSubsystem);
@@ -107,20 +113,24 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		AutoModes autoSelected = (AutoModes)autoChooser.getSelected();
 		switch(autoSelected)  {
-		case AutoGearLeft:
-			autonomousCommand = new AutonomousGearLeft();
+//		case AutoGearLeft:
+//			autonomousCommand = new AutonomousGearLeft();
+//			break;
+//		case AutoGearCenter:
+//			autonomousCommand = new AutonomousGearCenter();
+//			break;
+		case AutoStraight:
+//			autonomousCommand = new DriveStraightCommand(distanceToTravel);
+			autonomousCommand = new DriveStraightCommand(132);
 			break;
-		case AutoGearCenter:
-			autonomousCommand = new AutonomousGearCenter();
-			break;
-		case AutoTestingStraight:
-			autonomousCommand = new DriveStraightCommand(distanceToTravel);
-			break;
-		case AutoGearRight:
-			autonomousCommand = new AutonomousGearRight();
-			break;
+//		case AutoGearRight:
+//			autonomousCommand = new AutonomousGearRight();
+//			break;
 		case AutoShooter:
 			autonomousCommand = new StartShooterCommandGroup();
+			break;
+		case AutoStraightCenter:
+			autonomousCommand = new AutoStraightCenterCommandGroup();
 		}
 
 		if (autonomousCommand != null)
@@ -145,6 +155,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 			agitatorSubsystem.stopAgitator();
 			shooterSubsystem.stopShootBalls();
+			ledSubsystem.turnOnLed();
 			//TODO check if vision is on and if so, turn off
 		}
 	}
@@ -156,8 +167,8 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		logger.log(); //TODO make sure I did this right, por favor
 		Scheduler.getInstance().run();
-		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
-		mecanumDriveSubsystem.gyro.startLiveWindowMode();
+//		SmartDashboard.putNumber("Gyro value", mecanumDriveSubsystem.gyro.getAngle());
+//		mecanumDriveSubsystem.gyro.startLiveWindowMode();
 	}
 
 	/**
