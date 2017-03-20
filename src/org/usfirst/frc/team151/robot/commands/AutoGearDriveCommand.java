@@ -20,7 +20,7 @@ public class AutoGearDriveCommand extends Command {
 		// eg. requires(chassis);
 		requires(Robot.mecanumDriveSubsystem);
 		Robot.gearVision.startVision();
-		drivePid = new PIDController(0.05, 0.0, 0.0, new PIDSource() {
+		drivePid = new PIDController(0.01, 0.0, 0.0, new PIDSource() {
 			PIDSourceType m_sourceType = PIDSourceType.kDisplacement;
 
 			@Override

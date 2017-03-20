@@ -61,6 +61,7 @@ public class ShootBallsCommand extends Command {
 	protected void initialize() {
 //		shooterPid.reset();
 		Robot.shooterSubsystem.wheelEncoder.reset();
+		Robot.secondaryDriverOi.shooterOn = true;
 //		shooterPid.enable();
 	}
 
@@ -80,6 +81,7 @@ public class ShootBallsCommand extends Command {
 	// Called once after isFinished returns true
 	protected void end() {
 		Robot.shooterSubsystem.wheelEncoder.reset();
+		Robot.secondaryDriverOi.shooterOn = false;
 //		Robot.shooterSubsystem.stopShootBalls();
 	}
 

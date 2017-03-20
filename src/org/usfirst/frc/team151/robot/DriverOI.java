@@ -19,9 +19,9 @@ public class DriverOI extends OI{
 	public DriverOI(int joystickChannel) {
 		super(joystickChannel);
 //		leftBumper = new JoystickButton(joystick, 5);
-//		rightBumper = new JoystickButton(joystick, 6);
+		rightBumper = new JoystickButton(joystick, RobotMap.creepMode); 
 //		leftTrigger = new JoystickButton(joystick, 7);
-//		rightTrigger = new JoystickButton(joystick, 8); 
+		rightTrigger = new JoystickButton(joystick, RobotMap.turboMode); 
 //		x = new JoystickButton(joystick, 1);
 //		y = new JoystickButton(joystick, 4);
 

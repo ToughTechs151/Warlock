@@ -19,11 +19,10 @@ public class BaseVision {
 	protected double currentRectHeightPix;
 
 	protected UsbCamera usbCamera = null;
-	protected Thread visionThread;
+	protected Thread visionThread = null;
 
 	//Outputs
 	private Mat source = new Mat();
-	private Mat flipOutput = new Mat();
 	private Mat hsvThresholdOutput = new Mat();
 	private Mat blurOutput = new Mat();
 	private ArrayList<MatOfPoint> findContoursOutput = new ArrayList<MatOfPoint>();
@@ -50,12 +49,14 @@ public class BaseVision {
    for each separate class, and should be distinct for each class
 	 */
 	public void startVision() {
+		if (visionThread != null) {
+			return;
+		}
 		visionThread = new Thread(() -> {
 			CvSink frame = getVideoFrame();
 			// Setup a CvSource. This will send images back to the Dashboard
 			CvSource outputStream = CameraServer.getInstance().putVideo("Vision Processing", 640, 480);
 
-			// Mats are very memory expensive. Lets reuse this Mat.
 			Mat mat = new Mat();
 
 			// This cannot be 'true'. The program will never exit if it is. This
@@ -82,37 +83,6 @@ public class BaseVision {
 		visionThread.start();
 	}
 	
-	public void startGearVisionFlipped() {
-		visionThread = new Thread(() -> {
-			CvSink frame = getVideoFrame();
-			// Setup a CvSource. This will send images back to the Dashboard
-			CvSource outputStream = CameraServer.getInstance().putVideo("Flipped Gear Cam", 640, 480);
-
-			// Mats are very memory expensive. Lets reuse this Mat.
-			Mat mat = new Mat();
-			Mat result = new Mat();
-
-			// This cannot be 'true'. The program will never exit if it is. This
-			// lets the robot stop this thread when restarting robot code or
-			// deploying.
-			while (!Thread.interrupted()) {
-				// Tell the CvSink to grab a frame from the camera and put it
-				// in the source mat.  If there is an error notify the output.
-				if (frame.grabFrame(mat) == 0) {
-					// Send the output the error.
-					outputStream.notifyError(frame.getError());
-					// skip the rest of the current iteration
-					continue;
-				}
-				// Process the image
-				cvFlip(mat, FlipCode.X_AXIS, result);
-				// Give the output stream a new image to display
-				outputStream.putFrame(result);
-			}
-		});
-		visionThread.setDaemon(true);
-		visionThread.start();
-	}
 
 	public void stopVision() {
 		visionThread.interrupt();
@@ -122,13 +92,8 @@ public class BaseVision {
 		//TODO INSERT CODE FOR EACH SEPARATE VISION CLASS
 		this.source = source0;
 
-		//Step Flip
-		Mat cvFlipSrc = source0;
-		FlipCode cvFlipFlipcode = FlipCode.X_AXIS;
-		cvFlip(cvFlipSrc, cvFlipFlipcode, cvFlipOutput);
-
 		// Step HSV_Threshold0:
-		Mat hsvThresholdInput = flipOutput;
+		Mat hsvThresholdInput = source0;
 		double[] hsvThresholdHue = RobotMap.hsvThresholdHue;
 		double[] hsvThresholdSaturation = RobotMap.hsvThresholdSaturation;
 		double[] hsvThresholdValue = RobotMap.hsvThresholdValue;
@@ -161,16 +126,16 @@ public class BaseVision {
 		filterContours(filterContoursContours, filterContoursMinArea, filterContoursMinPerimeter, filterContoursMinWidth, filterContoursMaxWidth, filterContoursMinHeight, filterContoursMaxHeight, filterContoursSolidity, filterContoursMaxVertices, filterContoursMinVertices, filterContoursMinRatio, filterContoursMaxRatio, filterContoursOutput);
 
 		// Step Bounding_Rectangle:
-		Mat boundingRectInput = flipOutput;
+		Mat boundingRectInput = source0;
 		ArrayList<MatOfPoint> boundingRectInput2 = filterContoursOutput;
 		boundingRect(boundingRectInput, boundingRectInput2);
 
 		//Step center circle:
-		Mat drawCenterOfRectInput = flipOutput;
+		Mat drawCenterOfRectInput = source0;
 		drawCenterOfRect(drawCenterOfRectInput);
 
-		Imgproc.putText(flipOutput, getBoilerDistance(currentRectHeightPix, FOCAL_LENGTH) + "", new Point(0, 0), 0, 2.0, new Scalar(0, 255, 0));
-		return flipOutput;
+		Imgproc.putText(source0, getBoilerDistance(currentRectHeightPix, FOCAL_LENGTH) + "", new Point(0, 0), 0, 15.0, new Scalar(0, 255, 0));
+		return source0;
 	}
 
 	/**

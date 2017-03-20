@@ -16,26 +16,10 @@ public class BoilerVision extends BaseVision {
 	
 	public BoilerVision(int channel) {
 		super(channel);
-		// TODO Auto-generated constructor stub
-	}
-	
-	@Override
-	public void startVision() {
-		super.startVision();
-	}
-	
-	@Override
-	public void stopVision() {
-		super.stopVision();
 	}
 	
 	public double getDistance() {
 		return super.getBoilerDistance(HEIGHT_OF_OBJECT, FOCAL_LENGTH);
 	}
 	
-	@Override
-	public double getDistanceFromCenter() {
-		return super.getDistanceFromCenter();
-	}
-
 }

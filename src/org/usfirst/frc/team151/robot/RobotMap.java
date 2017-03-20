@@ -36,6 +36,10 @@ public class RobotMap {
 	static double[] hsvThresholdSaturation = {0.0, 40.0};
 	static double[] hsvThresholdValue = {235.0, 255.0};
 	
+	//Controller controls
+	public static int turboMode = 8;
+	public static int creepMode = 6;
+	
 	// If you are using multiple modules, make sure to define both the port
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;

@@ -1,6 +1,7 @@
 package org.usfirst.frc.team151.robot.subsystems;
 
 import org.usfirst.frc.team151.robot.OI;
+import org.usfirst.frc.team151.robot.Robot;
 import org.usfirst.frc.team151.robot.RobotMap;
 import org.usfirst.frc.team151.robot.commands.DriveWithJoystickCommand;
 
@@ -98,17 +99,19 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 */
 	public void drive(OI oi) {
 		Joystick joystick = oi.getJoystick();
-		double x = threshold(joystick.getRawAxis(0), oi); //0 is x-axis
-		double y = threshold(joystick.getRawAxis(1), oi); //1 is y-axis
-		double z = threshold(joystick.getRawAxis(2), oi); //2 is z-axis 
+		System.out.println("About to call threshold method");
+		double x = threshold( oi, 0); //0 is x-axis
+		double y = threshold(oi, 1); //1 is y-axis
+		double z = threshold(oi, 2); //2 is z-axis 
 		robotDrive.mecanumDrive_Cartesian(x, y, z, 0); // TODO WHAT IS THE FOURTH PARAMETER	
 		System.out.println("count: " + leftRearEncoder.get());
 	}
 	
-	public double threshold (double rawAxis, OI oi) {
+	public double threshold (OI oi, int axis) {
 		JoystickButton rbumper = oi.getJoystickButton(6);
 		JoystickButton rtrigger = oi.getJoystickButton(8);
-		if (rawAxis >= 0.03) { //adds a deadzone
+		double rawAxis = oi.getJoystick().getRawAxis(axis);
+//		if (rawAxis >= 0.03) { //adds a deadzone
 			if (rbumper.get()) { //TODO check if returns true when pressed
 				return rawAxis * creepMultiplier;
 			}
@@ -118,10 +121,10 @@ public class MecanumDriveSubsystem extends Subsystem {
 			else {
 				return rawAxis * normalMultiplier;
 			}
-		}
-		else {
-			return 0;
-		}
+//		}
+//		else {
+//			return 0;
+//		}
 	}
 	
 	/**

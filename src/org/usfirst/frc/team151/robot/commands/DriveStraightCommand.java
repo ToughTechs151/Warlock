@@ -55,7 +55,7 @@ public class DriveStraightCommand extends Command {
 //    	Robot.mecanumDriveSubsystem.gyro.reset();
     	Robot.mecanumDriveSubsystem.leftRearEncoder.reset();
 		driverPid.enable();
-    	SmartDashboard.putData("Drive PIDController", driverPid);
+//    	SmartDashboard.putData("Drive PIDController", driverPid);
     }
 
     // Make this return true when this Command no longer needs to run execute()

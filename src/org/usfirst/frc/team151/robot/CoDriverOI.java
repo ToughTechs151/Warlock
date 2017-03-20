@@ -23,6 +23,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
  *
  */
 public class CoDriverOI extends OI{
+	
+	public boolean shooterOn = false;
  
 	public CoDriverOI(int joystickChannel) {
 		super(joystickChannel);
@@ -36,12 +38,12 @@ public class CoDriverOI extends OI{
 		
 //		rightTrigger.whenPressed(new StartShooterCommandGroup());
 //		rightBumper.whenPressed(new StopShooterCommandGroup());
-		rightBumper.whenPressed(new ShootBallsCommand(1.0));
+		rightBumper.whenPressed(new ShootBallsCommand(0.9));
 		rightBumper.whenReleased(new StopShootBallsCommand());
-		leftBumper.whenPressed(new ReverseAgitatorCommand());
-		leftBumper.whenReleased(new StopAgitatorCommand());
 		leftTrigger.whenPressed(new StartAgitatorCommand());
 		leftTrigger.whenReleased(new StopAgitatorCommand());
+		leftBumper.whenPressed(new ReverseAgitatorCommand());
+		leftBumper.whenReleased(new StopAgitatorCommand());
 		x.whenPressed(new PickUpCommand());
 		x.whenReleased(new StopPickupCommand());
 		a.whenPressed(new ReversePickupCommand());

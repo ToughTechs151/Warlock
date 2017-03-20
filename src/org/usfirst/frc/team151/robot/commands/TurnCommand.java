@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.interfaces.Gyro;
 public class TurnCommand extends Command {
 	
 	double turnAngle = 0;
+	double currentAngle = 0;
 	boolean stopTurn = false;
 	
     public TurnCommand(double turn) {
@@ -29,9 +30,16 @@ public class TurnCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.mecanumDriveSubsystem.drive(0, 0, 0.25);
-    	if (Robot.mecanumDriveSubsystem.gyro.getAngle() >= turnAngle) {
+    	currentAngle = Robot.mecanumDriveSubsystem.gyro.getAngle();
+    	if (currentAngle >= turnAngle) {
+    		Robot.mecanumDriveSubsystem.drive(0, 0, 0);
     		stopTurn = true;
+    	}
+    	else if (currentAngle >= turnAngle - 30) {
+    		Robot.mecanumDriveSubsystem.drive(0, 0, 0.125);
+    	}
+    	else {
+    		Robot.mecanumDriveSubsystem.drive(0, 0, 0.25);
     	}
     }
 
@@ -43,6 +51,7 @@ public class TurnCommand extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.mecanumDriveSubsystem.gyro.reset();
+    	Robot.mecanumDriveSubsystem.drive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same

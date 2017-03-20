@@ -20,24 +20,7 @@ public class GearVision extends BaseVision {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@Override
-	public void startVision() {
-//		super.startVision(); TODO put this back if we do gears in auto
-		super.startGearVisionFlipped();
-	}
-	
-	@Override
-	public void stopVision() {
-		super.stopVision();
-	}
-	
 	public double getDistance() {
 		return super.getGearDistance(WIDTH_OF_OBJECT, FOCAL_LENGTH);
 	}
-	
-	@Override
-	public double getDistanceFromCenter() {
-		return super.getDistanceFromCenter();
-	}
-
 }

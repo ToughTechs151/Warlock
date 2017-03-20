@@ -7,6 +7,6 @@ public class StopShooterCommandGroup extends CommandGroup {
 	public StopShooterCommandGroup() {
 		addSequential(new StopShootBallsCommand());
 		addSequential(new StopAgitatorCommand());
-		addSequential(new StopBoilerVisionCommand());
+//		addSequential(new StopBoilerVisionCommand());
 	}
 }
