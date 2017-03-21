@@ -26,8 +26,6 @@ public class StartAgitatorCommand extends Command {
     	if (Robot.secondaryDriverOi.shooterOn) {
     		Robot.agitatorSubsystem.startAgitator();
     	}
-    	//System.out.println("The StartAgitatorCommand is working!");
-    	//System.out.println("Left trigger: " + Robot.secondaryDriverOi.getJoystickButton(7));
     	isStart = true;
     }
 

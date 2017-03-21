@@ -39,7 +39,6 @@ public class DriveStraightCommand extends Command {
 		}, new PIDOutput() {
 			@Override
 			public void pidWrite(double d) {
-//				Robot.mecanumDriveSubsystem.drive(Robot.primaryDriverOi);
 				Robot.mecanumDriveSubsystem.drive(0.0, d, 0.0);
 			}
 		});
@@ -52,10 +51,9 @@ public class DriveStraightCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	driverPid.reset();
-//    	Robot.mecanumDriveSubsystem.gyro.reset();
+    	Robot.mecanumDriveSubsystem.gyro.reset();
     	Robot.mecanumDriveSubsystem.leftRearEncoder.reset();
 		driverPid.enable();
-//    	SmartDashboard.putData("Drive PIDController", driverPid);
     }
 
     // Make this return true when this Command no longer needs to run execute()

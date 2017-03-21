@@ -17,7 +17,10 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
+/*
+ * TEST THE GYRO IN THE DRIVESTRAIGHT METHOD TO SEE IF THAT IS CAUSING ROBOT
+ * TO VEER SIDEWAYS IN AUTONOMOUS
+ */
 /**
  * The VM is configured to automatically run this class, and to call the
  * functions corresponding to each mode, as described in the IterativeRobot
@@ -45,13 +48,17 @@ public class Robot extends IterativeRobot {
 
 	//Initialize cameras in roboInit()!!!!!!
 	public static GearVision gearVision = null;
-//	public static BoilerVision boilerVision = null;
+	public static BoilerVision boilerVision = null;
 	public static DriverOI primaryDriverOi = null;
 	public static CoDriverOI secondaryDriverOi = null;
 	
 	Preferences preference = null;
 	
 	public static double distanceToTravel;
+	public static double shooterSpeed;
+	public static double autoGearInitialDistance;
+	public static double autoGearFinalDistance;
+	public static boolean startLogger;
 
 	private SendableChooser <AutoModes> autoChooser = new SendableChooser<AutoModes>();
 	private Command autonomousCommand;
@@ -62,14 +69,18 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
-//		boilerVision = new BoilerVision(0);
+		boilerVision = new BoilerVision(0);
 		gearVision = new GearVision(1);
 
 		primaryDriverOi = new DriverOI(RobotMap.primaryJoystick);
 		secondaryDriverOi = new CoDriverOI(RobotMap.secondaryJoystick);
 		
 		preference = Preferences.getInstance();
-		distanceToTravel = preference.getDouble("DistanceToTravelStraight", 72.0);
+		distanceToTravel = preference.getDouble("AutoDistanceToTravelStraight", 72.0);
+		shooterSpeed = preference.getDouble("ShooterSpeed", 0.9);
+		autoGearInitialDistance = preference.getDouble("AutoGearInitialDistance", 12);
+		autoGearFinalDistance = preference.getDouble("AutoGearFinalDistance", 54);
+		startLogger = preference.getBoolean("TurnOnLogger", false);
 		
 		autoChooser.addDefault("AutoGearCenter", AutoModes.AutoGearCenter);
 //		autoChooser.addDefault("AutoGearLeft", AutoModes.AutoGearLeft);
@@ -158,7 +169,9 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		logger.log(); //TODO make sure I did this right, por favor
+		if (startLogger) {
+			logger.log(); //TODO make sure I did this right???
+		}
 		Scheduler.getInstance().run();
 	}
 

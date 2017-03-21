@@ -12,7 +12,6 @@ public class BoilerVision extends BaseVision {
 	 * The focal length of the camera
 	 */
 	private static final double FOCAL_LENGTH = 707.567;
-//	private static final double FOCAL_LENGTH = 788.6;
 	
 	public BoilerVision(int channel) {
 		super(channel);

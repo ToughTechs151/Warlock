@@ -27,9 +27,6 @@ public class MecanumDriveSubsystem extends Subsystem {
 	private SpeedController leftRearSpeedController = null;
 	private RobotDrive robotDrive = null;
 	
-//	private Encoder leftFrontEncoder = null; //TODO
-//	public Encoder rightFrontEncoder = null; //TODO
-//	private Encoder rightRearEncoder = null;
 	public Encoder leftRearEncoder = null;
 	
 	public static ADXRS450_Gyro gyro = null;
@@ -53,16 +50,9 @@ public class MecanumDriveSubsystem extends Subsystem {
 		rightRearSpeedController = new Talon(RobotMap.rightRearMotor);
 		leftRearSpeedController = new Talon(RobotMap.leftRearMotor);
 		
-//		rightFrontEncoder = new Encoder(RobotMap.rightFrontB, RobotMap.rightFrontA, false, Encoder.EncodingType.k4X);
-//		leftRearEncoder = new Encoder(RobotMap.leftRearB, RobotMap.leftRearA, false, Encoder.EncodingType.k4X);
 		leftRearEncoder = new Encoder(RobotMap.leftRearA, RobotMap.leftRearB);
-		
-//		rightFrontEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
 		leftRearEncoder.setDistancePerPulse(DISTANCE_PER_PULSE);
-		
 		leftRearEncoder.setReverseDirection(true);
-		
-//		rightFrontEncoder.reset();
 		leftRearEncoder.reset();
 		
 		gyro = new ADXRS450_Gyro();
@@ -88,9 +78,8 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 * @param rotation
 	 */
 	public void drive(double x, double y, double rotation) {
-		System.out.println("in x y rotation drive method");
-		log();
 		robotDrive.mecanumDrive_Cartesian(x, y, rotation, 0);
+//		robotDrive.mecanumDrive_Cartesian(x, y, rotation, gyro.getAngle()); TODO TEST THIS
 	}
 	
 	/**
@@ -98,20 +87,21 @@ public class MecanumDriveSubsystem extends Subsystem {
 	 * @param joystick
 	 */
 	public void drive(OI oi) {
-		Joystick joystick = oi.getJoystick();
 		System.out.println("About to call threshold method");
 		double x = threshold( oi, 0); //0 is x-axis
 		double y = threshold(oi, 1); //1 is y-axis
 		double z = threshold(oi, 2); //2 is z-axis 
-		robotDrive.mecanumDrive_Cartesian(x, y, z, 0); // TODO WHAT IS THE FOURTH PARAMETER	
-		System.out.println("count: " + leftRearEncoder.get());
+		robotDrive.mecanumDrive_Cartesian(x, y, z, 0);
 	}
 	
 	public double threshold (OI oi, int axis) {
 		JoystickButton rbumper = oi.getJoystickButton(6);
 		JoystickButton rtrigger = oi.getJoystickButton(8);
 		double rawAxis = oi.getJoystick().getRawAxis(axis);
-//		if (rawAxis >= 0.03) { //adds a deadzone
+		/*
+		 * Check all of this (the deadzone part)
+		 */
+		if (rawAxis >= 0.03) { //adds a deadzone
 			if (rbumper.get()) { //TODO check if returns true when pressed
 				return rawAxis * creepMultiplier;
 			}
@@ -121,10 +111,10 @@ public class MecanumDriveSubsystem extends Subsystem {
 			else {
 				return rawAxis * normalMultiplier;
 			}
-//		}
-//		else {
-//			return 0;
-//		}
+		}
+		else {
+			return 0;
+		}
 	}
 	
 	/**
@@ -142,7 +132,6 @@ public class MecanumDriveSubsystem extends Subsystem {
 	
 	public void resetAll() {
 		leftRearEncoder.reset();
-//		rightFrontEncoder.reset();
-//		gyro.reset();
+		gyro.reset();
 	}
 }

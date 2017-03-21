@@ -24,7 +24,6 @@ public class TurnLedOffCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	Robot.ledSubsystem.turnOffLed();;
-    	System.out.println("Stopping LEDs");
     	finished = true;
     }
 

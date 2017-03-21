@@ -38,7 +38,7 @@ public class CoDriverOI extends OI{
 		
 //		rightTrigger.whenPressed(new StartShooterCommandGroup());
 //		rightBumper.whenPressed(new StopShooterCommandGroup());
-		rightBumper.whenPressed(new ShootBallsCommand(0.9));
+		rightBumper.whenPressed(new ShootBallsCommand(Robot.shooterSpeed));
 		rightBumper.whenReleased(new StopShootBallsCommand());
 		leftTrigger.whenPressed(new StartAgitatorCommand());
 		leftTrigger.whenReleased(new StopAgitatorCommand());
